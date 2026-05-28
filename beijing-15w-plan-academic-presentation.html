@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>北京市“十五五”规划纲要深度解读</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --stage-bg: #e8e1d8;
+      --slide-bg: #f8f3ec;
+      --paper: #f8f3ec;
+      --paper-deep: #f0e7dd;
+      --ink: #101010;
+      --muted: #57524c;
+      --line: rgba(16, 16, 16, 0.14);
+      --line-strong: rgba(16, 16, 16, 0.24);
+      --accent: #d93514;
+      --accent-soft: rgba(217, 53, 20, 0.08);
+      --accent-soft-2: rgba(217, 53, 20, 0.14);
+      --shadow: 0 28px 80px rgba(52, 35, 24, 0.16);
+      --title-size: 96px;
+      --subtitle-size: 32px;
+      --body-size: 25px;
+      --small-size: 18px;
+      --tiny-size: 15px;
+      --slide-padding: 72px;
+      --content-gap: 24px;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-normal: 0.55s;
+      --font-display: 'Archivo', sans-serif;
+      --font-body: 'Noto Sans SC', sans-serif;
+      --font-serif: 'Noto Serif SC', serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+
+    body {
+      color: var(--ink);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 10% 12%, rgba(217,53,20,.11), transparent 22%),
+        linear-gradient(135deg, #e8e1d8 0%, #ddd4c8 100%);
+    }
+
+    .deck-viewport {
+      background:
+        radial-gradient(circle at 10% 12%, rgba(217,53,20,.08), transparent 20%),
+        linear-gradient(135deg, #e8e1d8 0%, #ddd4c8 100%);
+    }
+
+    .deck-stage {
+      box-shadow: var(--shadow);
+      background: var(--paper);
+    }
+
+    .slide {
+      background:
+        linear-gradient(rgba(0,0,0,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.04) 1px, transparent 1px),
+        linear-gradient(180deg, #faf6ef 0%, #f6f0e8 100%);
+      background-size: 72px 72px, 72px 72px, auto;
+    }
+
+    .surface {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 58px 72px 58px 72px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 22px;
+      border: 2px solid rgba(16, 16, 16, 0.12);
+      pointer-events: none;
+    }
+
+    .accent-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 208px;
+      height: 14px;
+      background: var(--accent);
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .eyebrow, .page, .card-kicker, .cover-tag, .side-label {
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow {
+      font-size: 17px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .slide-title {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 56px;
+      line-height: 1.02;
+      letter-spacing: -.03em;
+    }
+
+    .page {
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 1600px;
+      font-size: 24px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .body {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .grid { display: grid; gap: 16px; min-height: 0; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .ratio-55-45 { grid-template-columns: 1.14fr .86fr; }
+    .compact-grid { align-items: stretch; }
+
+    .card, .quote-card, .mini-card {
+      background: rgba(255,255,255,.58);
+      border: 1.5px solid var(--line-strong);
+      backdrop-filter: blur(1px);
+    }
+
+    .card {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 0;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -.02em;
+    }
+
+    .card p, .quote-card p, .mini-card span, li {
+      font-size: 22px;
+      line-height: 1.58;
+      margin: 0;
+    }
+
+    .card-kicker {
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    .tight-list {
+      margin: 0;
+      padding-left: 1.2em;
+      display: grid;
+      gap: 6px;
+    }
+
+    .tight-list li::marker { color: var(--accent); }
+
+    .quote-card {
+      position: relative;
+      padding: 24px 24px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      background: linear-gradient(180deg, rgba(217,53,20,.06), rgba(255,255,255,.56));
+    }
+
+    .quote-mark {
+      position: absolute;
+      right: 18px;
+      top: 12px;
+      font-family: var(--font-serif);
+      font-size: 110px;
+      line-height: 1;
+      color: rgba(217,53,20,.16);
+    }
+
+    .quote-card p {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      line-height: 1.7;
+    }
+
+    .quote-note {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+
+    .small-quote p {
+      font-size: 25px;
+      line-height: 1.75;
+    }
+
+    .mini-cards { margin-top: auto; }
+
+    .mini-card {
+      padding: 16px 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 118px;
+      background: rgba(255,255,255,.45);
+    }
+
+    .mini-card strong {
+      font-family: var(--font-display);
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -.02em;
+      color: var(--accent);
+    }
+
+    .mini-card.text-left { text-align: left; align-items: flex-start; justify-content: flex-start; }
+
+    .quote-strip {
+      margin-top: auto;
+      padding: 14px 18px;
+      border-left: 8px solid var(--accent);
+      background: var(--accent-soft);
+      font-family: var(--font-serif);
+      font-size: 24px;
+      line-height: 1.68;
+    }
+
+    .table-wrap {
+      flex: 1;
+      min-height: 0;
+      background: rgba(255,255,255,.72);
+      border: 1.5px solid var(--line-strong);
+      overflow: hidden;
+    }
+
+    .table-wrap.tall { flex: 1; }
+
+    table.plan-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 19px;
+      line-height: 1.45;
+    }
+
+    .plan-table th, .plan-table td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .plan-table th:last-child, .plan-table td:last-child { border-right: none; }
+    .plan-table th {
+      background: rgba(16,16,16,.92);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: .08em;
+    }
+
+    .source-note {
+      position: absolute;
+      left: 72px;
+      bottom: 22px;
+      font-size: 14px;
+      color: rgba(87,82,76,.95);
+      font-family: var(--font-mono);
+      letter-spacing: .02em;
+    }
+
+    .cover-slide {
+      background:
+        linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px),
+        linear-gradient(135deg, #faf6ef 0%, #f0e7dc 100%);
+      background-size: 86px 86px, 86px 86px, auto;
+    }
+
+    .cover-surface {
+      padding: 74px 84px;
+      position: relative;
+    }
+
+    .cover-grid {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 240px;
+      height: 240px;
+      background: var(--accent);
+    }
+
+    .cover-tag {
+      position: relative;
+      margin-left: 270px;
+      margin-top: 20px;
+      font-size: 20px;
+      color: var(--ink);
+    }
+
+    .cover-title {
+      position: relative;
+      z-index: 1;
+      margin: 86px 0 0 270px;
+      width: 1080px;
+      font-family: var(--font-display);
+      font-size: 122px;
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+
+    .cover-subtitle {
+      margin: 40px 0 0 276px;
+      width: 980px;
+      font-size: 32px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .cover-meta {
+      margin: 40px 0 0 276px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .cover-meta span {
+      padding: 10px 14px;
+      border: 1.5px solid var(--line-strong);
+      background: rgba(255,255,255,.66);
+      font-size: 18px;
+    }
+
+    .cover-side {
+      position: absolute;
+      right: 84px;
+      top: 174px;
+      width: 410px;
+      padding: 22px 24px;
+      border: 2px solid var(--ink);
+      background: rgba(255,255,255,.64);
+      display: grid;
+      gap: 10px;
+    }
+
+    .side-label { font-size: 13px; color: var(--accent); }
+    .side-value { font-size: 20px; line-height: 1.55; }
+
+    .cover-footer {
+      position: absolute;
+      left: 84px;
+      bottom: 34px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: rgba(87,82,76,.95);
+    }
+
+    .progress-track {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      width: 320px;
+      height: 6px;
+      transform: translateX(-50%);
+      background: rgba(16,16,16,.08);
+      z-index: 1000;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      transition: width .28s ease;
+    }
+
+    .deck-status {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 1000;
+      padding: 10px 14px;
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(16,16,16,.16);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: .06em;
+    }
+
+    .nav-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 1000;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(16,16,16,.3);
+      background: rgba(255,255,255,.55);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--accent);
+      transform: scale(1.25);
+      border-color: var(--accent);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--duration-normal) var(--ease-out-expo), transform var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.visible .reveal:nth-child(2) { transition-delay: .05s; }
+    .slide.visible .reveal:nth-child(3) { transition-delay: .1s; }
+    .slide.visible .reveal:nth-child(4) { transition-delay: .15s; }
+
+    @media print {
+      .progress-track, .deck-status, .nav-dots { display: none !important; }
+      .slide::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+      
+<section class="slide active visible cover-slide" data-slide="1">
+  <div class="surface cover-surface">
+    <div class="cover-grid"></div>
+    <div class="cover-tag reveal">ACADEMIC POLICY BRIEFING / BEIJING / 2026</div>
+    <h1 class="cover-title reveal">北京市“十五五”规划纲要<br>深度解读</h1>
+    <p class="cover-subtitle reveal">围绕总体目标、指标体系、功能定位、京津冀协同、新质生产力、民生建设、绿色转型与韧性安全，构建一份适合专家汇报、学术讨论与政策研究的高密度横版演示。</p>
+    <div class="cover-meta reveal">
+      <span>官方原文拆解</span>
+      <span>政策原句摘引</span>
+      <span>2030目标对照</span>
+      <span>研究型汇报结构</span>
+    </div>
+    <div class="cover-side reveal">
+      <div class="side-label">汇报定位</div>
+      <div class="side-value">横版 · 研究型 · 便于后续导出转换为 PPT</div>
+      <div class="side-label">解读方法</div>
+      <div class="side-value">原文结构梳理 + 指标表拆解 + 主题归纳 + 学术判断</div>
+      <div class="side-label">版本</div>
+      <div class="side-value">2026年5月整理</div>
+    </div>
+    <div class="cover-footer">依据文本：《北京市国民经济和社会发展第十五个五年规划纲要》</div>
+  </div>
+</section>
+
+
+    <section class="slide" data-slide="2">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">REPORT STRUCTURE</div>
+            <h2 class="slide-title">这份汇报怎么读</h2>
+          </div>
+          <div class="page">02 / 30</div>
+        </header>
+        <p class="intro reveal">本演示不是简单摘录目录，而是把规划文本重构为一份“专家解读型”报告：先讲战略定位，再讲指标体系，继而拆四个中心、区域协同、产业与民生，最后落到绿色、安全、约束与启示。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card stat-card">
+    <div class="card-kicker">材料基础</div>
+    <h3>官方纲要原文</h3>
+    <ul class="tight-list">
+      <li>以 15 篇、59 章的原始结构为线索</li>
+      <li>重点抓取目标、指标、任务、机制四类信息</li>
+      <li>突出政策原文中的关键词和硬约束</li>
+    </ul>
+  </article>
+  <article class="card stat-card">
+    <div class="card-kicker">解读路径</div>
+    <h3>从“是什么”到“意味着什么”</h3>
+    <ul class="tight-list">
+      <li>规划定位：北京式现代化的战略角色</li>
+      <li>政策工具：空间、产业、民生、治理、双碳</li>
+      <li>研究判断：约束条件、落地难点与启示</li>
+    </ul>
+  </article>
+  <article class="card stat-card">
+    <div class="card-kicker">阅读提示</div>
+    <h3>这是一份高密度阅读型 deck</h3>
+    <ul class="tight-list">
+      <li>信息量刻意做大，更接近课题组/研究院汇报</li>
+      <li>多处保留政策原文，方便后续写材料或发言</li>
+      <li>整体为横版 16:9，可继续导出 PDF / 转 PPT</li>
+    </ul>
+  </article>
+</div>
+<div class="grid grid-5 mini-cards">
+  <div class="mini-card"><strong>01</strong><span>规划定位与方法</span></div>
+  <div class="mini-card"><strong>02</strong><span>“十四五”成绩与起点</span></div>
+  <div class="mini-card"><strong>03</strong><span>2030目标与指标体系</span></div>
+  <div class="mini-card"><strong>04</strong><span>功能、产业、民生与治理</span></div>
+  <div class="mini-card"><strong>05</strong><span>绿色、安全、挑战与启示</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="3">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">FROM THE 14TH PLAN</div>
+            <h2 class="slide-title">“十四五”为“十五五”提供了什么起点</h2>
+          </div>
+          <div class="page">03 / 30</div>
+        </header>
+        <p class="intro reveal">规划开篇先用“重大成就”定义北京当前所处方位。这个写法很重要，因为“十五五”不是重新起步，而是在首都功能、科技创新、区域协同和城市治理基础上继续全面发力。</p>
+        <div class="body reveal">
+<div class="grid grid-2 ratio-55-45">
+  <article class="card">
+    <div class="card-kicker">总体判断</div>
+    <h3>北京已经从“稳住大局”转向“率先现代化全面发力”</h3>
+    <ul class="tight-list">
+      <li>经济总量连续迈上 <strong>4万亿、5万亿</strong> 两个台阶，年均增长 <strong>5.2%</strong>。</li>
+      <li>全社会研发经费投入强度保持在 <strong>6%左右</strong>，国家级高新技术企业和独角兽企业数量居全国城市首位。</li>
+      <li>形成 <strong>3个万亿级</strong> 和 <strong>7个千亿级</strong> 产业集群，信息服务业、金融业、工业增加值合计贡献超过八成。</li>
+      <li>北京向津冀输出技术合同成交额约 <strong>3300亿元</strong>，较“十三五”时期翻番。</li>
+      <li>居民人均可支配收入超 <strong>8.9万元</strong>，城镇调查失业率始终保持在 <strong>5%以内</strong>。</li>
+      <li>新增中小学学位 <strong>17.5万个</strong>，建成 <strong>14个</strong> 紧密型城市医疗集团。</li>
+      <li>城市轨道交通新增运营里程 <strong>182公里</strong>，接诉即办推动 70 余个高频难题专项治理。</li>
+      <li>PM2.5 年均浓度降至 <strong>27微克/立方米</strong>，公园总数达 <strong>1136个</strong>。</li>
+    </ul>
+  </article>
+  <article class="quote-card">
+    <div class="quote-mark">“</div>
+    <p>“‘十四五’时期是极不平凡的五年……首都现代化建设取得新的瞩目成就，人民群众生活更加幸福美好。”</p>
+    <p>“北京综合实力和国际影响力大幅提升，为率先基本实现社会主义现代化奠定了坚实基础。”</p>
+    <div class="quote-note">这两句话构成“十五五”规划的历史起点：不是补短板式维稳，而是以更高层级的综合跃升为目标。</div>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="4">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">STRATEGIC POSITIONING</div>
+            <h2 class="slide-title">“十五五”时期的战略定位与六个“更加注重”</h2>
+          </div>
+          <div class="page">04 / 30</div>
+        </header>
+        <p class="intro reveal">规划第二章、第三章实际上回答了一个核心问题：北京在全国现代化大局中的独特任务是什么。它把“十五五”界定为率先基本实现社会主义现代化夯实基础、全面发力的关键时期。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card">
+    <div class="card-kicker">关键时期</div>
+    <h3>承前启后、全面发力</h3>
+    <p>原文明确：“‘十五五’时期是基本实现社会主义现代化夯实基础、全面发力的关键时期，战略机遇和风险挑战并存。”</p>
+  </article>
+  <article class="card">
+    <div class="card-kicker">根本任务</div>
+    <h3>率先基本实现社会主义现代化</h3>
+    <p>不是单纯增长规划，而是功能服务、治理能力、国际影响力、人民福祉与安全韧性的整体跃升。</p>
+  </article>
+  <article class="card">
+    <div class="card-kicker">北京角色</div>
+    <h3>大国首都的示范功能</h3>
+    <p>北京的发展必须置于中国式现代化全局中理解，承担“四个中心”“四个服务”的国家使命。</p>
+  </article>
+</div>
+<div class="grid grid-3 six-principles">
+  <div class="mini-card text-left"><strong>01</strong><span>更加注重优化提升首都功能</span></div>
+  <div class="mini-card text-left"><strong>02</strong><span>更加注重增进民生福祉</span></div>
+  <div class="mini-card text-left"><strong>03</strong><span>更加注重增强创新动能</span></div>
+  <div class="mini-card text-left"><strong>04</strong><span>更加注重深化改革开放</span></div>
+  <div class="mini-card text-left"><strong>05</strong><span>更加注重加强超大城市治理</span></div>
+  <div class="mini-card text-left"><strong>06</strong><span>更加注重统筹发展和安全</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="5">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">MAIN GOALS TO 2030</div>
+            <h2 class="slide-title">到 2030 年，北京想达到什么状态</h2>
+          </div>
+          <div class="page">05 / 30</div>
+        </header>
+        <p class="intro reveal">规划把 2030 年界定为“今后五年”的阶段性目标，同时再向 2035 年远景做衔接。最重要的特征是：目标是分领域、分层次、带有明确治理色彩的。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>首都功能持续提升</h3><p>“四个中心”功能更强，“四个服务”机制更健全，现代化首都都市圈扎实推进。</p></article>
+  <article class="card"><h3>高质量发展迈上新台阶</h3><p>地区生产总值年均增速 <strong>4.5%-5%</strong>，努力争取更好结果，人均地区生产总值和全员劳动生产率保持全国领先。</p></article>
+  <article class="card"><h3>全面深化改革取得新突破</h3><p>要素市场化配置、营商环境、制度型开放和民主法治建设同步推进。</p></article>
+  <article class="card"><h3>群众生活品质不断提高</h3><p>就业、收入、教育、医疗、养老、托育、住房与社保体系持续扩容提质。</p></article>
+  <article class="card"><h3>首都文化影响力明显增强</h3><p>历史文化传承、文化产业、文化科技融合与国际传播力共同提升。</p></article>
+  <article class="card"><h3>美丽北京与首都安全同步进阶</h3><p>花园城市初步建成，污染物持续下降，城市韧性与安全治理体系更完善。</p></article>
+</div>
+<div class="quote-strip">规划原文：到 2035 年，实现首都功能服务保障能力、综合经济实力、科技创新实力、城市治理能力、国际影响力大幅提升，率先基本实现社会主义现代化。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="6">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">INDICATOR SYSTEM I</div>
+            <h2 class="slide-title">主要指标表（上）：创新、协调、绿色</h2>
+          </div>
+          <div class="page">06 / 30</div>
+        </header>
+        <p class="intro reveal">规划的指标表是理解“十五五”硬约束和核心取向的关键。上半部分尤其体现“科技首都、超大城市约束治理、绿色转型”的三重逻辑。</p>
+        <div class="body reveal">
+<div class="table-wrap tall">
+  <table class="plan-table">
+    <thead>
+      <tr><th>类别</th><th>指标</th><th>2030目标</th><th>属性</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>创新</td><td>全社会 R&amp;D 经费支出占 GDP 比重</td><td>&gt;6%</td><td>预期性</td></tr>
+      <tr><td>创新</td><td>每万人口高价值发明专利拥有量</td><td>240 件左右</td><td>预期性</td></tr>
+      <tr><td>创新</td><td>地区生产总值年均增速</td><td>4.5% - 5%</td><td>预期性</td></tr>
+      <tr><td>创新</td><td>全员劳动生产率</td><td>58 万元/人左右</td><td>预期性</td></tr>
+      <tr><td>创新</td><td>数字经济增加值年均增速</td><td>8%左右</td><td>预期性</td></tr>
+      <tr><td>协调</td><td>副中心和平原新城 GDP 年均增速</td><td>&gt;5%</td><td>预期性</td></tr>
+      <tr><td>协调</td><td>轨道站点 500 米范围人口和岗位覆盖率</td><td>25.7%</td><td>预期性</td></tr>
+      <tr><td>协调</td><td>生产生活用水总量</td><td>&lt;30 亿立方米</td><td>约束性</td></tr>
+      <tr><td>协调</td><td>城乡建设用地规模</td><td>&lt;2760 平方公里</td><td>约束性</td></tr>
+      <tr><td>协调</td><td>常住人口规模</td><td>≤2300 万人</td><td>约束性</td></tr>
+      <tr><td>绿色</td><td>绿色经济重点产业收入年均增速</td><td>6%左右</td><td>预期性</td></tr>
+      <tr><td>绿色</td><td>细颗粒物年均浓度</td><td>达到国家要求</td><td>约束性</td></tr>
+      <tr><td>绿色</td><td>彩化率</td><td>24.2%</td><td>约束性</td></tr>
+      <tr><td>绿色</td><td>优良水体比例 / 碳强度 / 非化石能源占比</td><td>按国家衔接目标执行</td><td>约束性</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="7">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">INDICATOR SYSTEM II</div>
+            <h2 class="slide-title">主要指标表（下）：开放、共享、安全</h2>
+          </div>
+          <div class="page">07 / 30</div>
+        </header>
+        <p class="intro reveal">下半部分的指标表说明，北京并不只追求“高增长”，而是把开放平台、就业收入、托育养老、垃圾回收和安全底线全部纳入规划治理框架。</p>
+        <div class="body reveal">
+<div class="table-wrap tall">
+  <table class="plan-table">
+    <thead>
+      <tr><th>类别</th><th>指标</th><th>2030目标</th><th>属性</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>开放</td><td>北京口岸出入境人数占全国比重</td><td>3.8%左右</td><td>预期性</td></tr>
+      <tr><td>开放</td><td>实际利用外资规模</td><td>【350 亿美元左右】</td><td>预期性</td></tr>
+      <tr><td>开放</td><td>服务贸易年均增速</td><td>5%左右</td><td>预期性</td></tr>
+      <tr><td>开放</td><td>外资研发中心数量</td><td>500 家左右</td><td>预期性</td></tr>
+      <tr><td>共享</td><td>居民人均可支配收入年均增速</td><td>与经济增长同步</td><td>预期性</td></tr>
+      <tr><td>共享</td><td>城镇调查失业率</td><td>&lt;5%</td><td>预期性</td></tr>
+      <tr><td>共享</td><td>养老机构护理型床位占比</td><td>73%</td><td>预期性</td></tr>
+      <tr><td>共享</td><td>3 岁以下婴幼儿入托率提高</td><td>【15 个百分点左右】</td><td>预期性</td></tr>
+      <tr><td>共享</td><td>生活垃圾回收利用率</td><td>&gt;46%</td><td>约束性</td></tr>
+      <tr><td>共享</td><td>人均接受文化场馆服务次数</td><td>&gt;8.5 次</td><td>预期性</td></tr>
+      <tr><td>安全</td><td>单位 GDP 生产安全事故死亡率</td><td>&lt;0.6 人/百亿元</td><td>约束性</td></tr>
+      <tr><td>安全</td><td>十万常住人口火灾死亡率</td><td>≤0.25</td><td>预期性</td></tr>
+      <tr><td>安全</td><td>食品 / 药品抽检合格率</td><td>&gt;98.7% / &gt;99%</td><td>约束性</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="8">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">FOUR CENTERS</div>
+            <h2 class="slide-title">规划的总逻辑：四个中心不是并列清单，而是首都治理总框架</h2>
+          </div>
+          <div class="page">08 / 30</div>
+        </header>
+        <p class="intro reveal">把十五五纲要拆开看，会发现北京的规划不是一般城市规划，而是围绕“政治中心、文化中心、国际交往中心、国际科技创新中心”展开，再由区域协同、城市治理与安全体系托底。</p>
+        <div class="body reveal">
+<div class="grid grid-5 compact-grid">
+  <article class="mini-card text-left"><strong>政治中心</strong><span>服务党中央和国家工作大局，优化核心区政务环境与重大活动保障。</span></article>
+  <article class="mini-card text-left"><strong>文化中心</strong><span>历史名城、文化遗产、文旅融合、文明交流互鉴同步推进。</span></article>
+  <article class="mini-card text-left"><strong>国际交往中心</strong><span>服务总体外交，建设高品质国际化环境，提升对外交流平台能级。</span></article>
+  <article class="mini-card text-left"><strong>科技创新中心</strong><span>AI 驱动创新体系、原始创新、成果转化、中关村与“三城一区”联动。</span></article>
+  <article class="mini-card text-left"><strong>都市圈托举</strong><span>京津冀协同、城市副中心、雄安、新城与功能圈形成更大空间支撑。</span></article>
+</div>
+<div class="quote-strip">一个重要理解：北京的经济、产业、民生、空间和绿色治理，最终都服务于“首都功能更强”和“率先现代化示范”这两个总目标。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="9">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">POLITICAL CENTER</div>
+            <h2 class="slide-title">政治中心功能：规划首先回答“首都何以为首都”</h2>
+          </div>
+          <div class="page">09 / 30</div>
+        </header>
+        <p class="intro reveal">第二篇专门写政治中心功能，说明北京的首位任务仍然是服务党中央和国家工作大局。这是整个规划的政治前提，也是空间更新、人口调控和功能布局的重要依据。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">核心任务</div>
+    <ul class="tight-list">
+      <li>在落实重大决策部署上走在前、作表率。</li>
+      <li>积极服务中央政务功能布局优化。</li>
+      <li>坚持首善标准服务保障重大活动。</li>
+      <li>不断提升核心区城市品质：营造庄重有序政务环境、塑造古今交融老城风貌、打造舒适便利人居环境。</li>
+    </ul>
+  </article>
+  <article class="quote-card">
+    <div class="quote-mark">“</div>
+    <p>“十五五”时期，坚持“看北京首先要从政治上看”，不折不扣落实党中央决策部署，为中央党政军领导机关提供优质服务。</p>
+    <div class="quote-note">学术上可理解为：北京的城市功能并非完全市场驱动，而是典型的国家治理型城市逻辑。</div>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="10">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">CULTURE + INTERNATIONAL EXCHANGE</div>
+            <h2 class="slide-title">文化中心与国际交往中心：北京在“叙事能力”和“交往能力”上同步发力</h2>
+          </div>
+          <div class="page">10 / 30</div>
+        </header>
+        <p class="intro reveal">第三篇和第四篇合起来看，北京不只是“有文化资源”，而是要把历史文化名城、文化产业、文明互鉴和国际外事环境系统化地连接起来。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">全国文化中心</div>
+    <ul class="tight-list">
+      <li>建设新时代党的创新理论学习研究宣传高地。</li>
+      <li>建设社会风气和道德风尚最好的城市。</li>
+      <li>建设彰显中华文化自信的历史文化名城，突出“两轴”与三条文化带。</li>
+      <li>建设人民群众向往的文化荟萃之都，推动公共文化、现代文化产业、全域旅游协同发展。</li>
+      <li>建设面向世界的文明交流互鉴窗口，提升国际传播力。</li>
+    </ul>
+  </article>
+  <article class="card">
+    <div class="card-kicker">国际交往中心</div>
+    <ul class="tight-list">
+      <li>积极服务国家总体外交，提升外交外事活动服务能力。</li>
+      <li>建好国际交往功能重点承载区域，培育高品质特色化外交外事活动载体。</li>
+      <li>打造对外开放合作平台，吸引集聚国际组织在京发展。</li>
+      <li>进一步便利国际人员跨境往来，系统提升涉外服务品质，提高航空枢纽国际服务能力。</li>
+    </ul>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="11">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">SCIENCE & INNOVATION</div>
+            <h2 class="slide-title">国际科技创新中心：AI 被推到“主引擎”位置</h2>
+          </div>
+          <div class="page">11 / 30</div>
+        </header>
+        <p class="intro reveal">第五篇是北京规划中最具前沿色彩的部分：不仅强调国家战略科技力量和原始创新，更把人工智能写成驱动创新体系重构和产业体系升级的主轴。</p>
+        <div class="body reveal">
+<div class="grid grid-2 ratio-55-45">
+  <article class="card">
+    <div class="card-kicker">结构性重点</div>
+    <ul class="tight-list">
+      <li>建强国家实验室、怀柔综合性国家科学中心等战略科技力量集群。</li>
+      <li>率先构建人工智能驱动的创新体系，抢占关键算法、基础模型、智能算力和高质量数据集高地。</li>
+      <li>推动科技创新与产业创新深度融合，提升成果转化效能。</li>
+      <li>加快建设中关村世界领先科技园区，统筹“三城一区”联动。</li>
+      <li>推进教育科技人才一体发展，形成更具全球竞争力的创新生态。</li>
+    </ul>
+  </article>
+  <article class="quote-card">
+    <div class="quote-mark">“</div>
+    <p>“率先构建人工智能驱动的创新体系。”</p>
+    <p>“形成具有全球影响力的基础模型和一批行业垂类大模型。”</p>
+    <p>“为全球人工智能治理作出北京贡献。”</p>
+    <div class="quote-note">这意味着北京的创新中心不只追求技术突破，更承担制度、标准与治理规则输出功能。</div>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="12">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">JING-JIN-JI</div>
+            <h2 class="slide-title">京津冀协同与首都都市圈：北京把“空间外部性”写进了规划主轴</h2>
+          </div>
+          <div class="page">12 / 30</div>
+        </header>
+        <p class="intro reveal">第六篇围绕“一核两翼”、现代化首都都市圈和产业协同圈展开。理解北京“十五五”，不能只看行政边界内的增长，而要看更大尺度的功能重组与资源再配置。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>一核两翼</h3><p>深化非首都功能疏解，支持雄安新区高质量建设和发展，高水平建设城市副中心。</p></article>
+  <article class="card"><h3>现代化首都都市圈</h3><p>构建通勤圈、功能圈、产业协同圈，打造多圈层、组团式、网络化都市圈。</p></article>
+  <article class="card"><h3>协同创新共同体</h3><p>共同建设北京（京津冀）国际科技创新中心，做大做强区域优势产业链群。</p></article>
+</div>
+<div class="grid grid-3 mini-cards">
+  <div class="mini-card text-left"><strong>1 小时</strong><span>不断扩大 1 小时通勤覆盖范围，强化跨区域通勤效率。</span></div>
+  <div class="mini-card text-left"><strong>千亿投资</strong><span>城市副中心保持每年千亿级投资规模，承接功能与产业并进。</span></div>
+  <div class="mini-card text-left"><strong>同城化</strong><span>京雄在政务服务、交通通勤等领域率先实现更高水平同城化。</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="13">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">NEW QUALITY PRODUCTIVE FORCES</div>
+            <h2 class="slide-title">新质生产力：第七篇是整部规划里最强的产业政策章节</h2>
+          </div>
+          <div class="page">13 / 30</div>
+        </header>
+        <p class="intro reveal">这一篇明确提出：北京要加快建设全球数字经济标杆城市和国际绿色经济标杆城市，以培育世界一流产业集群为抓手，成为全国新质生产力发展的重要发动机。</p>
+        <div class="body reveal">
+<div class="grid grid-4">
+  <article class="card"><h3>数字经济标杆城市</h3><p>AI、数据要素、智能终端、数字安全、产业互联网、自动驾驶、具身智能等领域同步推进。</p></article>
+  <article class="card"><h3>绿色经济标杆城市</h3><p>绿色技术创新中心、绿色技术交易中心、ESG 与绿色认证等专业服务体系建设。</p></article>
+  <article class="card"><h3>战略性产业</h3><p>新一代信息技术、医药健康、人工智能、绿色先进能源、低碳环保等方向持续扩容。</p></article>
+  <article class="card"><h3>未来产业</h3><p>6G、量子、聚变能源、脑机接口、细胞与基因治疗、超导材料等前沿赛道提前布局。</p></article>
+</div>
+<div class="quote-strip">值得注意：北京把“未来产业”单列章节，说明其规划逻辑不止是做强现有优势产业，更强调对新技术范式和新产业制度的先行占位。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="14">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">AI + DIGITAL ECONOMY</div>
+            <h2 class="slide-title">原文摘引：数字经济与人工智能如何被表述</h2>
+          </div>
+          <div class="page">14 / 30</div>
+        </header>
+        <p class="intro reveal">如果只选一个最能体现北京未来发展方向的关键词，答案几乎一定是“人工智能 + 数字经济”。这里直接保留几段关键原文，便于后续写报告或演讲引用。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="quote-card small-quote">
+    <p>“建设全球人工智能创新策源地……形成具有全球影响力的基础模型和一批行业垂类大模型，前瞻布局类脑智能、量智融合等多元技术路线。”</p>
+  </article>
+  <article class="quote-card small-quote">
+    <p>“全面实施‘人工智能+’行动……形成人工智能全方位赋能千行百业、深度融入城市发展的典型范式。”</p>
+  </article>
+  <article class="quote-card small-quote">
+    <p>“适度超前部署信息基础设施……建设光网之都、万兆之城，开展国家数据流通基础设施和全国一体化算力网建设先行先试。”</p>
+  </article>
+  <article class="quote-card small-quote">
+    <p>“到2030年，智能体、新一代智能终端等应用普及率超过90%。”</p>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="15">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">CONSUMPTION + INVESTMENT</div>
+            <h2 class="slide-title">扩大内需：北京把消费、投资、物流和统一大市场打通写</h2>
+          </div>
+          <div class="page">15 / 30</div>
+        </header>
+        <p class="intro reveal">第八篇强调内需不是单一促消费，而是“消费升级 + 有效投资 + 现代物流 + 统一大市场”的综合系统。它对应的是北京从“总部经济”向“高品质消费与创新投资双引擎”升级。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">消费端</div>
+    <ul class="tight-list">
+      <li>建设国际消费中心城市，消费成为经济增长主引擎。</li>
+      <li>打造“乐动京城”、票根经济、会展+商务考察+定制旅游等融合产品。</li>
+      <li>建设 2-3 个千亿级融合消费新地标，做强文商旅体融合空间。</li>
+      <li>打造全球首发中心，发展情绪消费、宠物经济、国潮出海。</li>
+      <li>到 2030 年，市场总消费额年均增速 <strong>5%左右</strong>。</li>
+    </ul>
+  </article>
+  <article class="card">
+    <div class="card-kicker">投资端</div>
+    <ul class="tight-list">
+      <li>创新与产业投资占比达到 <strong>25%-30%</strong>。</li>
+      <li>城市更新投资占比达到 <strong>30%左右</strong>。</li>
+      <li>基础设施领域投资占比保持在 <strong>20%以上</strong>。</li>
+      <li>平原新城投资占比提升至 <strong>45%左右</strong>，成为区域投资新增长极。</li>
+      <li>同时推进统一大市场建设、产权保护、公平竞争与社会信用体系。</li>
+    </ul>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="16">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">REFORM + OPENING-UP</div>
+            <h2 class="slide-title">改革开放与营商环境：北京强调“制度供给能力”</h2>
+          </div>
+          <div class="page">16 / 30</div>
+        </header>
+        <p class="intro reveal">第九篇释放的信息非常明确：北京要继续做全国制度型开放和营商环境改革的高地，改革对象既包括市场体系，也包括公共服务和政府治理。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>社会主义市场经济体制</h3><p>充分激发各类经营主体活力，深化经济和公共服务领域改革，提高要素市场化配置效率。</p></article>
+  <article class="card"><h3>更高水平开放型经济</h3><p>打造制度型开放高地，培育外贸发展新动能，厚植外商投资兴业沃土，积极服务高质量共建“一带一路”。</p></article>
+  <article class="card"><h3>一流营商环境</h3><p>完善公平有序市场环境、公正透明法治环境、优质高效政务服务环境和开放便利投资贸易环境。</p></article>
+</div>
+<div class="grid grid-4 mini-cards">
+  <div class="mini-card text-left"><strong>服务贸易</strong><span>2030 年服务贸易年均增速保持在 5%左右。</span></div>
+  <div class="mini-card text-left"><strong>外资研发中心</strong><span>到 2030 年达到 500 家左右。</span></div>
+  <div class="mini-card text-left"><strong>实际利用外资</strong><span>“十五五”累计目标约 350 亿美元。</span></div>
+  <div class="mini-card text-left"><strong>制度目标</strong><span>从“项目型开放”走向“规则、标准、平台型开放”。</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="17">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">POPULATION + FERTILITY</div>
+            <h2 class="slide-title">人口发展与生育托育：规划承认人口结构变化已成为核心议题</h2>
+          </div>
+          <div class="page">17 / 30</div>
+        </header>
+        <p class="intro reveal">第十篇开头就是“着力促进人口高质量发展”。这意味着北京已经把人口问题从一般社会事务，上升为影响劳动力供给、公共服务配置和城市活力的结构性变量。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>人口战略</h3><p>常住人口规模继续实行上限管理，2030 年控制在 <strong>2300 万人以内</strong>，同时保持城市发展活力。</p></article>
+  <article class="card"><h3>生育支持</h3><p>发挥育儿补贴、个税抵扣、生育保险等作用，推动生育成本由政府、社会、个人共担，建设生育友好岗位。</p></article>
+  <article class="card"><h3>托育扩容</h3><p>坚持幼儿园办托为主渠道，社区和机构办托为依托，普惠托育价格与财政补助动态调整，3 岁以下入托率累计提高约 <strong>15 个百分点</strong>。</p></article>
+</div>
+<div class="quote-strip">规划原文：“聚焦‘七有’要求和市民‘五性’需求……增强基本公共服务均衡性，扩大基础民生服务普惠性，提升多样化社会服务可及性。”</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="18">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">EDUCATION + EMPLOYMENT + HEALTH</div>
+            <h2 class="slide-title">教育、就业、健康：民生建设被写成“能力扩容型”改革</h2>
+          </div>
+          <div class="page">18 / 30</div>
+        </header>
+        <p class="intro reveal">北京的民生章节不是简单兜底，而是明确提出优质公共服务扩容、结构优化和数字化赋能。教育、就业、医疗都是供给侧能力建设问题。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card">
+    <h3>教育</h3>
+    <ul class="tight-list">
+      <li>新增 <strong>10万个</strong> 中小学学位，重点增加高中学位。</li>
+      <li>新增 <strong>10万个</strong> 优质高等教育学位。</li>
+      <li>推进教育数字化战略，建设大中小学一体化人工智能素养培育体系。</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h3>就业与收入</h3>
+    <ul class="tight-list">
+      <li>城镇调查失业率控制在 <strong>5%以内</strong>。</li>
+      <li>实施“技能北京”培训行动，强化人工智能通识及应用培训。</li>
+      <li>推动城乡居民人均可支配收入持续增长、持续扩大中等收入群体。</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h3>健康北京</h3>
+    <ul class="tight-list">
+      <li>建成 <strong>25个以上</strong> 紧密型城市医疗集团，区级覆盖率 100%。</li>
+      <li>建设首都公共卫生中心，推动检查检验结果互认和互联网首诊探索。</li>
+      <li>人均预期寿命达到 <strong>84.8岁</strong>。</li>
+    </ul>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="19">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">ELDERCARE + HOUSING + SECURITY</div>
+            <h2 class="slide-title">养老、住房与社会保障：北京的“共享发展”更强调制度织网</h2>
+          </div>
+          <div class="page">19 / 30</div>
+        </header>
+        <p class="intro reveal">如果把第十篇继续往后看，会发现它的核心不是“多给一点福利”，而是把老龄化、住房保障和多层次社保做成一个长期制度系统。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>养老服务</h3><p>健全三级养老服务网络，街道（乡镇）区域养老服务中心覆盖率达到 <strong>80%</strong>；发展医养联合体、长期护理保险、失能失智照护与银发经济。</p></article>
+  <article class="card"><h3>住有所居</h3><p>构建“市场 + 保障”的住房供给体系，备案家庭保障率保持在 <strong>85%以上</strong>；新增公寓型和宿舍型保租房占比达到 <strong>60%以上</strong>。</p></article>
+  <article class="card"><h3>社会保障</h3><p>稳妥推进延迟退休改革，支持多层次多支柱养老保险发展，强化低收入群体保障与再分配调节。</p></article>
+</div>
+<div class="quote-strip">这一部分非常适合学术研究：北京的民生逻辑并非“普遍福利城市”，而是“高成本超大城市条件下的精准扩容与分层织网”。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="20">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">SPACE + URBAN-RURAL PATTERN</div>
+            <h2 class="slide-title">空间格局：城乡融合、活力片区、平原新城与生态涵养区同步推进</h2>
+          </div>
+          <div class="page">20 / 30</div>
+        </header>
+        <p class="intro reveal">第十一篇把北京内部空间再组织得非常清楚：城市不是单中心外扩，而是通过乡村振兴、活力片区、平原新城和生态涵养区形成差异化分工。</p>
+        <div class="body reveal">
+<div class="grid grid-4">
+  <article class="card"><h3>乡村全面振兴</h3><p>建设改造提升高标准农田 <strong>60万亩</strong>，打造 <strong>1500公里以上</strong>“美丽乡村路”。</p></article>
+  <article class="card"><h3>城市活力新片区</h3><p>大运河、“两园一河”、南中轴、奥林匹克国际会客厅等成为空间叙事与产业活动的新支点。</p></article>
+  <article class="card"><h3>平原新城</h3><p>重点承接产业和公共服务项目，成为区域投资增长极和功能分担平台。</p></article>
+  <article class="card"><h3>生态涵养区</h3><p>突出生态保护、绿色发展和深层次区域协作，不走高强度工业化老路。</p></article>
+</div>
+<div class="grid grid-3 mini-cards">
+  <div class="mini-card text-left"><strong>70%</strong><span>农村生活污水治理率、开敞空间占比等多项目标都体现“宜居化”导向。</span></div>
+  <div class="mini-card text-left"><strong>10个左右</strong><span>培育高品质功能型新城镇组团，增强多点支撑。</span></div>
+  <div class="mini-card text-left"><strong>区域协调</strong><span>说明北京正从“中心城区治理”转向“全域结构治理”。</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="21">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">MEGA-CITY GOVERNANCE</div>
+            <h2 class="slide-title">超大城市治理：更新、交通、数智北京、接诉即办一起构成治理现代化主轴</h2>
+          </div>
+          <div class="page">21 / 30</div>
+        </header>
+        <p class="intro reveal">第十二篇非常具有北京特色。它并不把治理理解为“管起来”，而是强调通过更新、交通、数字化和社会治理改革来重塑城市运行逻辑。</p>
+        <div class="body reveal">
+<div class="grid grid-4">
+  <article class="card"><h3>城市更新</h3><p>到 2030 年，城市更新年度投资达到 <strong>3000亿元以上</strong>；基本完成 <strong>57个</strong> 城中村改造。</p></article>
+  <article class="card"><h3>综合交通</h3><p>轨道站点 500 米覆盖率达到 <strong>25.7%</strong>，强化轨道、公交、停车和慢行系统协同。</p></article>
+  <article class="card"><h3>数智北京</h3><p>夯实数智化基础，提升城市治理数智化水平，加快形成智能社会新形态。</p></article>
+  <article class="card"><h3>接诉即办</h3><p>继续深化改革，把问题导向和群众感受嵌入日常治理体系。</p></article>
+</div>
+<div class="quote-strip">对研究者而言，北京“十五五”提供了一个观察超大城市治理如何从工程建设转向“数据 + 制度 + 场景”复合治理的样本。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="22">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">GREEN TRANSITION</div>
+            <h2 class="slide-title">绿色转型：北京把生态治理写成“城市发展方式”而非附属目标</h2>
+          </div>
+          <div class="page">22 / 30</div>
+        </header>
+        <p class="intro reveal">第十三篇集中反映北京绿色治理的完整框架：污染防治、花园城市、新型能源体系、双碳制度和治理机制不是碎片化任务，而是发展方式重构。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">花园城市</div>
+    <ul class="tight-list">
+      <li>新增造林绿化 <strong>5万亩</strong>，森林覆盖率保持在 <strong>45%以上</strong>。</li>
+      <li>自然岸线比例达到 <strong>68%</strong>。</li>
+      <li>新增 <strong>100个</strong> 城市、郊野等生态公园。</li>
+      <li>建成区公园绿地 500 米服务半径覆盖率达到 <strong>94%</strong>。</li>
+      <li>万人拥有绿道长度达到 <strong>3千米</strong>。</li>
+    </ul>
+  </article>
+  <article class="quote-card">
+    <div class="quote-mark">“</div>
+    <p>“把首都建设成为一个秩序壮美、和谐宜居的大花园。”</p>
+    <p>“深化‘0.1微克’攻坚行动，实现蓝天常伴、碧水可亲、沃土长净。”</p>
+    <div class="quote-note">绿色治理在北京并不是生态部门孤立任务，而是景观、游憩、产业、能源、交通和生活方式共同作用的城市发展战略。</div>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="23">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">ENERGY + CARBON</div>
+            <h2 class="slide-title">新型能源体系与“双碳”：北京的特点是“增绿提质 + 制度化治理”</h2>
+          </div>
+          <div class="page">23 / 30</div>
+        </header>
+        <p class="intro reveal">这一部分非常值得细读。北京没有简单停留在“减少排放”，而是把电网、储能、供热、碳预算、碳足迹、产品标准与能源合作一起纳入政策体系。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>能源结构</h3><p>推动“油换电”“油换氢”，年替代汽柴油量提升到 <strong>300万吨左右</strong>；新增光伏、风电装机 <strong>200万千瓦</strong>。</p></article>
+  <article class="card"><h3>新型电力系统</h3><p>建设适应高比例可再生能源消纳的电力系统，需求侧响应能力达到最大负荷的 <strong>5%</strong>。</p></article>
+  <article class="card"><h3>双碳制度</h3><p>实施碳排放总量和强度双控制度，建立市区两级碳排放预算管理制度，2030 年前实现碳达峰。</p></article>
+</div>
+<div class="grid grid-3 mini-cards">
+  <div class="mini-card text-left"><strong>650亿度</strong><span>外调绿电规模力争达到 650 亿千瓦时。</span></div>
+  <div class="mini-card text-left"><strong>8000万㎡</strong><span>完成既有建筑智能化供热改造 8000 万平方米。</span></div>
+  <div class="mini-card text-left"><strong>产品碳足迹</strong><span>在新能源汽车、氢能、电子电器等领域率先开展核算和标识认证。</span></div>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="24">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">SECURITY + RESILIENCE</div>
+            <h2 class="slide-title">安全与韧性：发展安全被写成首都现代化的内在组成部分</h2>
+          </div>
+          <div class="page">24 / 30</div>
+        </header>
+        <p class="intro reveal">第十四篇说明，北京对“安全”的理解已经超出传统治安和应急管理，转向政治安全、社会稳定、经济金融、生命线系统和韧性空间的整体统筹。</p>
+        <div class="body reveal">
+<div class="grid grid-4">
+  <article class="card"><h3>国家安全</h3><p>筑牢首都政治安全屏障，守牢意识形态阵地。</p></article>
+  <article class="card"><h3>平安北京</h3><p>加强矛盾纠纷排查化解，完善社会治安整体防控体系，深化安全生产治本攻坚。</p></article>
+  <article class="card"><h3>重点风险</h3><p>着力维护经济安全运行，积极推动新兴领域安全发展。</p></article>
+  <article class="card"><h3>城市韧性</h3><p>建强多源互补生命线系统、构建韧性空间、完善重大灾害预警防治体系。</p></article>
+</div>
+<div class="quote-strip">研究判断：北京规划中的“安全”是典型的“发展型安全观”，并不是增长的外部约束，而是现代化目标本身。</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="25">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">METHODOLOGY</div>
+            <h2 class="slide-title">从规划文本看，北京“十五五”有四个鲜明方法论特征</h2>
+          </div>
+          <div class="page">25 / 30</div>
+        </header>
+        <p class="intro reveal">如果从学术分析角度概括，这份规划最值得注意的并非单一指标，而是其政策写作和治理逻辑本身。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <ul class="tight-list">
+      <li><strong>功能先于增长：</strong>先讲首都职责，再讲产业和经济，体现政治中心城市的特殊性。</li>
+      <li><strong>治理先于开发：</strong>人口、土地、水资源、能耗、碳排放都作为硬约束嵌入发展目标。</li>
+      <li><strong>科技与产业一体化：</strong>教育科技人才、基础研究、成果转化、产业化、制度标准联动推进。</li>
+    </ul>
+  </article>
+  <article class="card">
+    <ul class="tight-list">
+      <li><strong>区域协同外溢：</strong>北京越来越多地把外部空间作为自身功能实现条件。</li>
+      <li><strong>民生不是附录：</strong>就业、养老、托育、住房、健康形成完整供给体系章节。</li>
+      <li><strong>双碳制度化：</strong>碳预算、碳足迹、碳市场、产品标准共同构成双碳治理体系。</li>
+    </ul>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="26">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">CONSTRAINTS & CHALLENGES</div>
+            <h2 class="slide-title">实施中的主要约束与潜在挑战</h2>
+          </div>
+          <div class="page">26 / 30</div>
+        </header>
+        <p class="intro reveal">如果这份规划要真正落地，至少会面对六类难题。专家汇报里最好把这些问题讲出来，才能从“文件复述”升级为“研究判断”。</p>
+        <div class="body reveal">
+<div class="grid grid-3">
+  <article class="card"><h3>功能与活力平衡</h3><p>首都功能强化、人口调控、土地约束与市场活力之间存在持续张力。</p></article>
+  <article class="card"><h3>创新转化链条</h3><p>科技强不等于产业强，基础研究优势如何更快转为产业竞争力仍是关键。</p></article>
+  <article class="card"><h3>需求与投资效率</h3><p>消费恢复、投资扩张和财政可持续之间需要更精细的平衡。</p></article>
+  <article class="card"><h3>人口结构变化</h3><p>老龄化、生育意愿下降与高生活成本，将持续影响劳动力和公共服务供给。</p></article>
+  <article class="card"><h3>双碳与增长协调</h3><p>能源安全、产业升级和碳约束之间仍有技术与制度磨合成本。</p></article>
+  <article class="card"><h3>区域协同治理</h3><p>京津冀协同涉及跨区域利益、财政、土地、公共服务与行政协调的长期博弈。</p></article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="27">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">RESEARCH IMPLICATIONS</div>
+            <h2 class="slide-title">对学术研究和政策观察有什么启示</h2>
+          </div>
+          <div class="page">27 / 30</div>
+        </header>
+        <p class="intro reveal">这份规划很适合拿来做城市研究、区域研究和公共政策研究的综合案例。它几乎囊括了超大城市现代化转型的所有关键维度。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">学术研究可切入的七个议题</div>
+    <ul class="tight-list">
+      <li>国家治理型城市与一般增长型城市的规划差异</li>
+      <li>首都功能优化与区域功能外溢机制</li>
+      <li>人工智能驱动的城市创新体系重构</li>
+      <li>超大城市民生供给扩容与财政承压</li>
+      <li>花园城市、双碳制度与绿色空间政治</li>
+      <li>接诉即办与数字治理的制度创新</li>
+      <li>韧性城市建设与发展型安全观</li>
+    </ul>
+  </article>
+  <article class="card">
+    <div class="card-kicker">实践层面的观察点</div>
+    <ul class="tight-list">
+      <li>2030 指标能否分解到区、到部门、到项目清单</li>
+      <li>AI、绿色经济、未来产业能否形成真实增量</li>
+      <li>副中心、平原新城、雄安之间如何形成功能协同而非同质竞争</li>
+      <li>教育、医疗、养老、住房能否形成可持续的扩容机制</li>
+      <li>碳预算、绿电、储能、热网改造能否形成制度闭环</li>
+    </ul>
+  </article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="28">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">PRIMARY TEXT EXCERPTS I</div>
+            <h2 class="slide-title">关键原文摘录（一）：战略定位与发展逻辑</h2>
+          </div>
+          <div class="page">28 / 30</div>
+        </header>
+        <p class="intro reveal">这一页保留几条最值得直接引用的原文，适合在答辩、报告、论文或政策解读文章中使用。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="quote-card small-quote"><p>“‘十五五’时期是基本实现社会主义现代化夯实基础、全面发力的关键时期。”</p></article>
+  <article class="quote-card small-quote"><p>“更加注重优化提升首都功能……不断提升大国首都影响力。”</p></article>
+  <article class="quote-card small-quote"><p>“地区生产总值年均增速 4.5%-5%，努力争取更好结果。”</p></article>
+  <article class="quote-card small-quote"><p>“构建现代化首都都市圈扎实推进，京津冀作为全国高质量发展动力源作用进一步凸显。”</p></article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="29">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">PRIMARY TEXT EXCERPTS II</div>
+            <h2 class="slide-title">关键原文摘录（二）：产业、民生与绿色转型</h2>
+          </div>
+          <div class="page">29 / 30</div>
+        </header>
+        <p class="intro reveal">第二组摘录更适合支撑“北京如何把科技、民生和双碳同时写进一个总规划”的论证。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="quote-card small-quote"><p>“形成人工智能全方位赋能千行百业、深度融入城市发展的典型范式。”</p></article>
+  <article class="quote-card small-quote"><p>“聚焦‘七有’要求和市民‘五性’需求……让发展成果更直接、更有力惠及全市人民。”</p></article>
+  <article class="quote-card small-quote"><p>“把首都建设成为一个秩序壮美、和谐宜居的大花园。”</p></article>
+  <article class="quote-card small-quote"><p>“实施碳排放总量和强度双控制度……2030年前实现碳达峰目标。”</p></article>
+</div>
+</div>
+        <div class="source-note">来源：北京市国民经济和社会发展第十五个五年规划纲要（2026年1月北京市十六届人大四次会议批准）。</div>
+      </div>
+    </section>
+    
+
+    <section class="slide" data-slide="30">
+      <div class="surface">
+        <div class="accent-bar"></div>
+        <header class="header reveal">
+          <div>
+            <div class="eyebrow">CONCLUSION</div>
+            <h2 class="slide-title">结论：北京“十五五”不是一份普通城市规划，而是一份首都现代化总体蓝图</h2>
+          </div>
+          <div class="page">30 / 30</div>
+        </header>
+        <p class="intro reveal">如果用一句话概括，这份规划是在更大国家战略框架下，把首都功能、科技创新、区域协同、民生供给、绿色转型和安全治理整合为一个整体推进的现代化方案。</p>
+        <div class="body reveal">
+<div class="grid grid-2">
+  <article class="card">
+    <div class="card-kicker">三点总结</div>
+    <ul class="tight-list">
+      <li>它的第一逻辑是 <strong>首都功能</strong>，不是单纯的经济增长竞争。</li>
+      <li>它的最强增量变量是 <strong>人工智能 + 新质生产力 + 京津冀协同</strong>。</li>
+      <li>它的落地关键在于 <strong>约束条件下的治理能力</strong>：人口、空间、碳、财政与安全韧性必须同步统筹。</li>
+    </ul>
+  </article>
+  <article class="quote-card">
+    <div class="quote-mark">“</div>
+    <p>适合专家汇报的讲法不是把目录从头念到尾，而是抓住这份规划背后的总问题：北京要如何在首都职责、现代产业、公共服务与超大城市约束之间，走出一条具有示范意义的中国式现代化道路。</p>
+    <div class="quote-note">END / 可继续细化为更长版，或转为课堂讲稿、论文提纲、答辩汇报。</div>
+  </article>
+</div>
+</div>
+        <div class="source-note">演示到此结束。若需要，我可以继续追加区级拆解、产业专题、图表页或口头讲稿版。</div>
+      </div>
+    </section>
+    
+    </main>
+  </div>
+  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="deck-status" id="deckStatus">01 / 30</div>
+  <div class="nav-dots" id="navDots"></div>
+
+  <script>
+    class SlidePresentation {
+      constructor() {
+        this.stage = document.getElementById('deckStage');
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentSlide = 0;
+        this.progressBar = document.getElementById('progressBar');
+        this.deckStatus = document.getElementById('deckStatus');
+        this.navDots = document.getElementById('navDots');
+        this.wheelLocked = false;
+        this.touchStartX = 0;
+        this.touchStartY = 0;
+        this.setupStageScale();
+        this.setupDots();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.showSlide(0);
+      }
+
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+      }
+
+      setupDots() {
+        this.slides.forEach((_, index) => {
+          const dot = document.createElement('button');
+          dot.className = 'nav-dot';
+          dot.type = 'button';
+          dot.title = `第 ${index + 1} 页`;
+          dot.addEventListener('click', () => this.showSlide(index));
+          this.navDots.appendChild(dot);
+        });
+      }
+
+      setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+          if (['ArrowRight', 'PageDown', ' '].includes(e.key)) {
+            e.preventDefault();
+            this.next();
+          }
+          if (['ArrowLeft', 'PageUp'].includes(e.key)) {
+            e.preventDefault();
+            this.prev();
+          }
+          if (e.key === 'Home') {
+            this.showSlide(0);
+          }
+          if (e.key === 'End') {
+            this.showSlide(this.slides.length - 1);
+          }
+        });
+      }
+
+      setupWheelNav() {
+        window.addEventListener('wheel', (e) => {
+          if (this.wheelLocked || Math.abs(e.deltaY) < 24) return;
+          this.wheelLocked = true;
+          if (e.deltaY > 0) this.next();
+          else this.prev();
+          setTimeout(() => this.wheelLocked = false, 700);
+        }, { passive: true });
+      }
+
+      setupTouchNav() {
+        window.addEventListener('touchstart', (e) => {
+          this.touchStartX = e.changedTouches[0].clientX;
+          this.touchStartY = e.changedTouches[0].clientY;
+        }, { passive: true });
+        window.addEventListener('touchend', (e) => {
+          const dx = e.changedTouches[0].clientX - this.touchStartX;
+          const dy = e.changedTouches[0].clientY - this.touchStartY;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 60) {
+            if (dx < 0) this.next();
+            else this.prev();
+          }
+        }, { passive: true });
+      }
+
+      prev() { this.showSlide(this.currentSlide - 1); }
+      next() { this.showSlide(this.currentSlide + 1); }
+
+      showSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === this.currentSlide);
+          slide.classList.toggle('visible', i === this.currentSlide);
+        });
+        const dots = Array.from(this.navDots.children);
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === this.currentSlide));
+        this.progressBar.style.width = `${((this.currentSlide + 1) / this.slides.length) * 100}%`;
+        this.deckStatus.textContent = `${String(this.currentSlide + 1).padStart(2, '0')} / ${String(this.slides.length).padStart(2, '0')}`;
+      }
+    }
+
+    new SlidePresentation();
+  </script>
+</body>
+</html>
