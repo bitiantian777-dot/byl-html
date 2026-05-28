@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>北京市、海淀区与朝阳区“十五五”重点产业比较</title>
+  <style>
+    :root {
+      --bg-a: #07111f;
+      --bg-b: #0d1b31;
+      --bg-c: #102441;
+      --panel: rgba(11, 21, 38, 0.82);
+      --panel-strong: rgba(15, 30, 56, 0.94);
+      --line: rgba(135, 194, 255, 0.16);
+      --line-strong: rgba(135, 194, 255, 0.34);
+      --text: #edf5ff;
+      --muted: #abc0dc;
+      --cyan: #8fd8ff;
+      --blue: #62a8ff;
+      --violet: #9485ff;
+      --gold: #efc57a;
+      --green: #71dcc6;
+      --pink: #ff92ca;
+      --danger: #ffb597;
+      --shadow: 0 26px 72px rgba(2, 7, 18, 0.42);
+      --radius: 24px;
+      --title-size: clamp(2rem, 4.6vw, 4rem);
+      --h2-size: clamp(1.3rem, 2.4vw, 2.35rem);
+      --h3-size: clamp(0.95rem, 1.22vw, 1.14rem);
+      --body-size: clamp(0.74rem, 1vw, 0.95rem);
+      --small-size: clamp(0.63rem, 0.82vw, 0.8rem);
+      --tiny-size: clamp(0.58rem, 0.7vw, 0.68rem);
+      --slide-padding: clamp(1rem, 2.4vw, 2rem);
+      --gap: clamp(0.7rem, 1vw, 1rem);
+      --max-content: min(94vw, 1480px);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(98, 168, 255, 0.18), transparent 26%),
+        radial-gradient(circle at 82% 18%, rgba(148, 133, 255, 0.12), transparent 24%),
+        radial-gradient(circle at 68% 78%, rgba(113, 220, 198, 0.08), transparent 24%),
+        linear-gradient(180deg, var(--bg-a) 0%, var(--bg-b) 44%, var(--bg-c) 100%);
+    }
+
+    body {
+      color: var(--text);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      background: transparent;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(143, 216, 255, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(143, 216, 255, 0.035) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.92), rgba(0,0,0,0.32));
+      opacity: 0.56;
+    }
+
+    .progress-track {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255,255,255,0.07);
+      z-index: 60;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--violet), var(--pink));
+      box-shadow: 0 0 18px rgba(143, 216, 255, 0.5);
+      transition: width 0.35s ease;
+    }
+
+    .meta {
+      position: fixed;
+      top: 16px;
+      right: 18px;
+      z-index: 50;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(143, 216, 255, 0.16);
+      background: rgba(6, 12, 24, 0.64);
+      backdrop-filter: blur(16px);
+      font-size: var(--tiny-size);
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      box-shadow: 0 10px 28px rgba(2, 7, 18, 0.36);
+    }
+
+    .meta strong { color: var(--text); }
+
+    .nav-dots {
+      position: fixed;
+      top: 50%;
+      right: 18px;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(143, 216, 255, 0.1);
+      background: rgba(6, 12, 24, 0.44);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(143,216,255,0.34);
+      background: rgba(143,216,255,0.08);
+      cursor: pointer;
+      transition: transform 0.22s ease, background 0.22s ease;
+    }
+
+    .nav-dot.active {
+      background: var(--cyan);
+      transform: scale(1.26);
+      box-shadow: 0 0 14px rgba(143, 216, 255, 0.46);
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      scroll-snap-align: start;
+      position: relative;
+      padding: var(--slide-padding);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 30px;
+      border: 1px solid rgba(143, 216, 255, 0.08);
+      pointer-events: none;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: var(--max-content);
+      height: 100%;
+      max-height: min(93vh, 940px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: "Songti SC", "STSong", "Source Han Serif SC", serif;
+    }
+
+    h1 {
+      font-size: var(--title-size);
+      line-height: 1.06;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: var(--h2-size);
+      line-height: 1.14;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: var(--h3-size);
+      line-height: 1.3;
+      font-weight: 700;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    p, li {
+      font-size: var(--body-size);
+      line-height: 1.62;
+      color: var(--text);
+    }
+
+    .section-kicker,
+    .page-index,
+    .chip,
+    .tag,
+    .mini-label {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-kicker {
+      font-size: var(--small-size);
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      max-width: 82ch;
+      margin-top: 8px;
+      font-size: var(--body-size);
+      line-height: 1.66;
+      color: var(--muted);
+    }
+
+    .page-index {
+      font-size: var(--tiny-size);
+      color: rgba(238,245,255,0.46);
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cover-grid,
+    .two-col,
+    .three-col,
+    .matrix-grid,
+    .bars,
+    .sources-grid {
+      display: grid;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .cover-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      flex: 1;
+    }
+
+    .two-col {
+      grid-template-columns: 0.9fr 1.1fr;
+      flex: 1;
+    }
+
+    .three-col,
+    .bars,
+    .sources-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .matrix-grid {
+      grid-template-columns: 0.86fr 1.05fr 1.05fr 1.05fr;
+      flex: 1;
+    }
+
+    .panel,
+    .summary-card,
+    .quote-card,
+    .matrix-cell,
+    .matrix-dim,
+    .score-card,
+    .source-card,
+    .note-card {
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(143, 216, 255, 0.12);
+      background:
+        linear-gradient(180deg, rgba(18, 38, 66, 0.84), rgba(10, 20, 35, 0.78));
+      box-shadow: var(--shadow);
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .panel.soft,
+    .summary-card {
+      background:
+        linear-gradient(180deg, rgba(28, 49, 84, 0.82), rgba(10, 20, 35, 0.74));
+    }
+
+    .panel.gold,
+    .quote-card.gold {
+      background:
+        linear-gradient(180deg, rgba(92, 68, 24, 0.28), rgba(10, 20, 35, 0.82));
+      border-color: rgba(239, 197, 122, 0.18);
+    }
+
+    .muted { color: var(--muted); }
+    .small { font-size: var(--small-size); color: var(--muted); line-height: 1.56; }
+    .strong { color: var(--cyan); font-weight: 700; }
+
+    .chip-row,
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(143,216,255,0.18);
+      background: rgba(143,216,255,0.08);
+      color: var(--cyan);
+      font-size: var(--tiny-size);
+      white-space: nowrap;
+    }
+
+    .tag.gold { color: var(--gold); border-color: rgba(239,197,122,0.22); background: rgba(239,197,122,0.08); }
+    .tag.green { color: var(--green); border-color: rgba(113,220,198,0.22); background: rgba(113,220,198,0.08); }
+    .tag.pink { color: var(--pink); border-color: rgba(255,146,202,0.22); background: rgba(255,146,202,0.08); }
+
+    ul.clean {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    ul.clean li {
+      position: relative;
+      padding-left: 15px;
+    }
+
+    ul.clean li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 10px rgba(143,216,255,0.4);
+    }
+
+    .quote-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: relative;
+      padding-top: 18px;
+    }
+
+    .quote-card::before {
+      content: "“";
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      font-size: 1.2rem;
+      font-family: "Songti SC", serif;
+      color: var(--gold);
+    }
+
+    .source {
+      font-size: var(--tiny-size);
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .summary-card .num {
+      font-size: 1.9rem;
+      line-height: 1;
+      font-family: "Songti SC", serif;
+      color: rgba(143,216,255,0.18);
+      margin-bottom: 6px;
+    }
+
+    .metric-row {
+      display: grid;
+      gap: 9px;
+      margin-top: 10px;
+    }
+
+    .metric {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .metric label {
+      font-size: var(--small-size);
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+    }
+
+    .bar.gold span { background: linear-gradient(90deg, var(--gold), #ffdca6); }
+    .bar.green span { background: linear-gradient(90deg, var(--green), #92f0de); }
+
+    .metric strong {
+      font-size: var(--small-size);
+      color: var(--text);
+    }
+
+    .cover-visual {
+      position: relative;
+      min-height: 300px;
+      border-radius: 22px;
+      border: 1px solid rgba(143,216,255,0.14);
+      background:
+        radial-gradient(circle at 22% 18%, rgba(143,216,255,0.16), transparent 24%),
+        radial-gradient(circle at 80% 18%, rgba(148,133,255,0.14), transparent 24%),
+        radial-gradient(circle at 48% 82%, rgba(113,220,198,0.12), transparent 26%),
+        linear-gradient(180deg, rgba(17, 34, 60, 0.92), rgba(8, 17, 31, 0.98));
+      overflow: hidden;
+    }
+
+    .ring,
+    .grid-card,
+    .dot-node {
+      position: absolute;
+    }
+
+    .ring {
+      border-radius: 999px;
+      border: 1px dashed rgba(143,216,255,0.24);
+    }
+
+    .ring.one { width: 300px; height: 300px; left: calc(50% - 150px); top: 34px; }
+    .ring.two { width: 200px; height: 200px; left: calc(50% - 100px); top: 84px; border-color: rgba(148,133,255,0.24); }
+    .ring.three { width: 100px; height: 100px; left: calc(50% - 50px); top: 134px; border-color: rgba(239,197,122,0.28); }
+
+    .dot-node {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 12px rgba(143,216,255,0.6);
+    }
+
+    .grid-card {
+      max-width: 180px;
+      padding: 9px 10px;
+      border-radius: 14px;
+      background: rgba(6, 12, 24, 0.78);
+      border: 1px solid rgba(143,216,255,0.16);
+      font-size: var(--small-size);
+      line-height: 1.48;
+      color: var(--text);
+      box-shadow: 0 10px 20px rgba(2,7,18,0.18);
+    }
+
+    .matrix-cell.matrix-head {
+      background: rgba(143,216,255,0.08);
+      color: var(--cyan);
+      font-size: var(--small-size);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    .matrix-dim {
+      background: rgba(239,197,122,0.08);
+      border-color: rgba(239,197,122,0.16);
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid rgba(143, 216, 255, 0.1);
+      text-align: left;
+      vertical-align: top;
+      font-size: var(--small-size);
+      line-height: 1.52;
+    }
+
+    .data-table th {
+      color: var(--cyan);
+      font-weight: 700;
+      width: 24%;
+      white-space: nowrap;
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .tech-figure {
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tech-figure svg {
+      width: 100%;
+      height: 100%;
+      max-height: 240px;
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: var(--tiny-size);
+      line-height: 1.5;
+      color: rgba(238, 245, 255, 0.58);
+    }
+
+    .compare-board {
+      display: grid;
+      grid-template-columns: 0.9fr 1.05fr 1.05fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .compare-card {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .compare-card h3 {
+      margin-bottom: 0;
+    }
+
+    .mini-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-block {
+      padding: 10px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(143, 216, 255, 0.1);
+      background: rgba(7, 18, 34, 0.44);
+    }
+
+    .mini-block h4 {
+      font-size: var(--small-size);
+      color: var(--cyan);
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+
+    .contrast-stack {
+      display: grid;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .contrast-card {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 14px;
+      min-height: 0;
+    }
+
+    .axis-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .axis-item {
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(239, 197, 122, 0.14);
+      background: rgba(92, 68, 24, 0.12);
+    }
+
+    .axis-item h4 {
+      font-size: var(--small-size);
+      color: var(--gold);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .reverse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .mapping-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .mapping-table th,
+    .mapping-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(143, 216, 255, 0.1);
+      vertical-align: top;
+      text-align: left;
+      font-size: var(--small-size);
+      line-height: 1.52;
+    }
+
+    .mapping-table th {
+      color: var(--cyan);
+      font-weight: 700;
+      background: rgba(143, 216, 255, 0.06);
+    }
+
+    .mapping-table td:first-child,
+    .mapping-table th:first-child {
+      width: 20%;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      font-size: var(--tiny-size);
+      color: rgba(238,245,255,0.54);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      filter: blur(6px);
+      transition:
+        opacity 0.58s var(--ease),
+        transform 0.64s var(--ease),
+        filter 0.64s var(--ease);
+    }
+
+    .slide.visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .reveal:nth-child(1) { transition-delay: 0.04s; }
+    .reveal:nth-child(2) { transition-delay: 0.1s; }
+    .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .reveal:nth-child(4) { transition-delay: 0.22s; }
+    .reveal:nth-child(5) { transition-delay: 0.28s; }
+    .reveal:nth-child(6) { transition-delay: 0.34s; }
+
+    @media (max-height: 780px) {
+      :root {
+        --title-size: clamp(1.7rem, 3.7vw, 3rem);
+        --h2-size: clamp(1.12rem, 1.95vw, 1.9rem);
+        --body-size: clamp(0.68rem, 0.88vw, 0.84rem);
+        --small-size: clamp(0.58rem, 0.68vw, 0.72rem);
+        --tiny-size: clamp(0.53rem, 0.6vw, 0.64rem);
+      }
+      .panel,
+      .summary-card,
+      .quote-card,
+      .matrix-cell,
+      .matrix-dim,
+      .score-card,
+      .source-card,
+      .note-card { padding: 12px 13px; }
+      .cover-visual { min-height: 250px; }
+      .ring.one { width: 260px; height: 260px; left: calc(50% - 130px); top: 26px; }
+      .ring.two { width: 180px; height: 180px; left: calc(50% - 90px); top: 66px; }
+      .ring.three { width: 92px; height: 92px; left: calc(50% - 46px); top: 112px; }
+    }
+
+    @media (max-width: 1180px) {
+      .cover-grid,
+      .two-col,
+      .three-col,
+      .matrix-grid,
+      .compare-board,
+      .contrast-card,
+      .reverse-grid,
+      .bars,
+      .sources-grid {
+        grid-template-columns: 1fr;
+      }
+      .meta,
+      .nav-dots { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal,
+      .slide.visible .reveal,
+      .nav-dot,
+      .progress-bar { transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; filter: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="meta"><span>产业比较研究</span><span>·</span><strong id="pageIndicator">01 / 14</strong></div>
+  <nav class="nav-dots" id="navDots" aria-label="幻灯片导航"></nav>
+
+  <section class="slide visible" id="slide-1" data-title="封面">
+    <div class="slide-content">
+      <div class="cover-grid">
+        <article class="panel reveal" style="display:flex; flex-direction:column; justify-content:space-between; gap:14px;">
+          <div>
+            <div class="section-kicker">Industry Comparison / Beijing 15th Five-Year Plan</div>
+            <h1>北京市、海淀区与朝阳区“十五五”重点产业比较</h1>
+            <p class="subtitle">基于北京市、海淀区、朝阳区“十五五”规划原文及 2025 至 2026 年官方公开数据，比较三地重点产业门类、现实支撑、空间分工及其可能形成的首都产业结构。</p>
+          </div>
+          <div class="chip-row reveal">
+            <span class="chip">政策原文</span>
+            <span class="chip">现实数据</span>
+            <span class="chip">区域比较</span>
+            <span class="chip">图表展示</span>
+          </div>
+          <div class="note-card reveal">
+            <h3>摘要结论</h3>
+            <p>北京市负责搭建首都产业总盘子，海淀负责前沿技术和未来产业突破，朝阳负责高端服务、开放平台和应用场景放大。三地共同发展新质生产力，但承担的产业环节不同。</p>
+          </div>
+        </article>
+        <aside class="panel reveal" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div class="cover-visual">
+            <div class="ring one"></div>
+            <div class="ring two"></div>
+            <div class="ring three"></div>
+            <div class="dot-node" style="top:84px; left:calc(50% - 5px);"></div>
+            <div class="dot-node" style="bottom:78px; left:94px;"></div>
+            <div class="dot-node" style="bottom:78px; right:94px;"></div>
+            <div class="grid-card" style="top:30px; left:calc(50% - 76px);">北京市<br><span class="muted">完整现代化产业体系</span></div>
+            <div class="grid-card" style="bottom:24px; left:28px;">海淀区<br><span class="muted">AI + 硬科技 + 未来产业</span></div>
+            <div class="grid-card" style="bottom:24px; right:28px;">朝阳区<br><span class="muted">金融商务 + 场景创新</span></div>
+          </div>
+          <div class="three-col">
+            <div class="summary-card reveal"><h3>北京</h3><p>重体系</p></div>
+            <div class="summary-card reveal"><h3>海淀</h3><p>重前沿</p></div>
+            <div class="summary-card reveal"><h3>朝阳</h3><p>重场景</p></div>
+          </div>
+        </aside>
+      </div>
+      <div class="footer"><span>主题：重点产业、现实对应、成因与影响</span><span class="page-index">01</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-2" data-title="研究问题">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Research Focus</div>
+          <h2>研究问题与分析框架</h2>
+          <p class="subtitle">比较以重点产业为核心，结合规划原文、现实指标与区域功能，识别三地产业部署的共同方向与结构性差异。</p>
+        </div>
+        <div class="page-index">02</div>
+      </header>
+      <div class="three-col" style="flex:1;">
+        <article class="panel soft reveal"><h3>问题 1</h3><p>北京市“十五五”规划的重点产业具体包括哪些门类？</p></article>
+        <article class="panel soft reveal"><h3>问题 2</h3><p>海淀与朝阳分别把什么当作核心产业，和北京市总盘子的关系是什么？</p></article>
+        <article class="panel soft reveal"><h3>问题 3</h3><p>这些产业在现实中分别对应什么样的区域资源、产业基础和空间承载？</p></article>
+      </div>
+      <div class="two-col" style="grid-template-columns: 1.05fr 0.95fr;">
+        <article class="panel reveal"><h3>问题 4</h3><p>为什么会形成这样的分工？它可能导致北京出现怎样的产业空间结构和区域关系？</p></article>
+        <article class="quote-card reveal"><p><span class="strong">分析路径</span>：规划文本识别重点产业门类，现实数据验证产业基础，区域资源解释形成机制，进而推演首都产业网络中的分工关系。</p><div class="source">研究框架说明</div></article>
+      </div>
+      <div class="footer"><span>方法：产业优先 + 原文支撑 + 现实延伸</span><span class="page-index">02</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-3" data-title="北京市重点产业">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Beijing Municipality</div>
+          <h2>北京市重点产业体系：首都层级的全门类布局</h2>
+          <p class="subtitle">北京市并非围绕单一产业赛道展开规划，而是将国际引领产业、新兴支柱产业、能级跃升产业、未来产业与生产性服务业组织为完整的现代化产业体系。</p>
+        </div>
+        <div class="page-index">03</div>
+      </header>
+      <div class="two-col">
+        <article class="panel reveal">
+          <h3>重点产业清单</h3>
+          <ul class="clean">
+            <li><span class="strong">国际引领产业</span>：新一代信息技术、医药健康。</li>
+            <li><span class="strong">新兴支柱产业</span>：人工智能、绿色先进能源与低碳环保。</li>
+            <li><span class="strong">能级跃升产业</span>：集成电路、机器人和智能制造、智能网联汽车、空天技术、新材料、新型安全应急。</li>
+            <li><span class="strong">未来产业</span>：6G、量子、脑机接口、生物制造、细胞与基因治疗等。</li>
+            <li><span class="strong">生产性服务业</span>：金融、科技服务等高端服务环节。</li>
+          </ul>
+        </article>
+        <article class="panel gold reveal">
+          <h3>原文支撑</h3>
+          <div class="quote-card gold">
+            <p>“做优国际引领产业集群……扩大新一代信息技术、医药健康产业集群优势。”</p>
+            <div class="source">北京市“十五五”规划，第七篇第二章</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“做大新兴支柱产业集群。推动人工智能、绿色先进能源与低碳环保产业规模提升。”</p>
+            <div class="source">同上</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“做强能级跃升产业集群。加快集成电路、机器人和智能制造、智能网联汽车、空天技术、新材料……”</p>
+            <div class="source">同上</div>
+          </div>
+        </article>
+      </div>
+      <div class="footer"><span>北京市最鲜明的特征：产业门类完整、层次清晰</span><span class="page-index">03</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-4" data-title="北京市现实对应">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Beijing in Reality</div>
+          <h2>北京市产业现实基础与政策逻辑</h2>
+          <p class="subtitle">北京市之所以采用全门类布局，是因为其承担首都功能、高端资源配置、科技创新策源与区域协同统筹的复合责任，规划对象是全市产业系统而非单一区域优势。</p>
+        </div>
+        <div class="page-index">04</div>
+      </header>
+      <div class="two-col" style="grid-template-columns: 1.12fr 0.88fr; flex:1;">
+        <article class="panel reveal">
+          <h3>现实数据证据</h3>
+          <table class="data-table">
+            <tr><th>地区生产总值</th><td>2025 年北京市 GDP 达 <span class="strong">5.2 万亿元</span>，显示其必须配置从研发、制造到服务的完整产业体系。</td></tr>
+            <tr><th>数字经济</th><td>数字经济增加值约 <span class="strong">2.4 万亿元</span>，占 GDP 比重 <span class="strong">46.4%</span>，为 AI、软件、平台经济和高端服务业提供规模基础。</td></tr>
+            <tr><th>人工智能</th><td>人工智能核心产业规模约 <span class="strong">4500 亿元</span>，相关企业超过 <span class="strong">2500 家</span>，说明市级规划将 AI 列为新兴支柱产业具有现实支撑。</td></tr>
+            <tr><th>先进制造</th><td>集成电路产业规模增长超过 <span class="strong">20%</span>，新能源汽车年产量接近 <span class="strong">70 万辆</span>，表明首都并非只做研发，也在补强高端制造链条。</td></tr>
+            <tr><th>创新主体</th><td>国家级高新技术企业超过 <span class="strong">3 万家</span>，北交所上市公司 <span class="strong">288 家</span>，显示资本市场与科技企业群体共同支撑产业升级。</td></tr>
+            <tr><th>医药健康</th><td>2025 年创新药械获批上市 <span class="strong">34 款</span>，对应规划中医药健康作为国际引领产业的定位。</td></tr>
+          </table>
+          <div class="caption">资料来源：北京市 2026 年政府工作报告、全球数字经济标杆城市建设发布会、北京市人工智能创新高地建设公开报道。</div>
+        </article>
+        <div class="stack">
+          <article class="panel reveal tech-figure">
+            <svg viewBox="0 0 520 230" xmlns="http://www.w3.org/2000/svg" aria-label="北京市产业系统线稿图">
+              <defs>
+                <linearGradient id="beijingLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#8fd8ff"/>
+                  <stop offset="100%" stop-color="#9485ff"/>
+                </linearGradient>
+              </defs>
+              <rect x="20" y="30" width="110" height="46" rx="12" fill="none" stroke="#8fd8ff" stroke-width="1.8"/>
+              <rect x="150" y="30" width="110" height="46" rx="12" fill="none" stroke="#8fd8ff" stroke-width="1.8"/>
+              <rect x="280" y="30" width="110" height="46" rx="12" fill="none" stroke="#8fd8ff" stroke-width="1.8"/>
+              <rect x="390" y="30" width="110" height="46" rx="12" fill="none" stroke="#efc57a" stroke-width="1.8"/>
+              <rect x="85" y="154" width="130" height="46" rx="12" fill="none" stroke="#71dcc6" stroke-width="1.8"/>
+              <rect x="305" y="154" width="130" height="46" rx="12" fill="none" stroke="#71dcc6" stroke-width="1.8"/>
+              <path d="M130 53H150M260 53H280M390 53H390" stroke="url(#beijingLine)" stroke-width="2"/>
+              <path d="M75 76C75 116 150 116 150 154" stroke="#8fd8ff" stroke-width="1.6" fill="none" stroke-dasharray="5 5"/>
+              <path d="M315 76C315 116 370 116 370 154" stroke="#8fd8ff" stroke-width="1.6" fill="none" stroke-dasharray="5 5"/>
+              <path d="M445 76C445 116 370 116 370 154" stroke="#efc57a" stroke-width="1.6" fill="none" stroke-dasharray="5 5"/>
+              <text x="75" y="58" fill="#edf5ff" font-size="15" text-anchor="middle">信息技术</text>
+              <text x="205" y="58" fill="#edf5ff" font-size="15" text-anchor="middle">人工智能</text>
+              <text x="335" y="58" fill="#edf5ff" font-size="15" text-anchor="middle">先进制造</text>
+              <text x="445" y="58" fill="#edf5ff" font-size="15" text-anchor="middle">医药健康</text>
+              <text x="150" y="182" fill="#edf5ff" font-size="15" text-anchor="middle">高端服务配置</text>
+              <text x="370" y="182" fill="#edf5ff" font-size="15" text-anchor="middle">京津冀协同转化</text>
+            </svg>
+          </article>
+          <article class="panel gold reveal">
+            <h3>原文与含义</h3>
+            <div class="quote-card gold">
+              <p>“统筹推进传统产业升级、新兴产业壮大、未来产业培育，构建体现首都特点的现代化产业体系。”</p>
+              <div class="source">北京市“十五五”规划总述</div>
+            </div>
+            <div class="quote-card gold" style="margin-top:10px;">
+              <p>“强化产业空间统筹布局，优化形成‘南部崛起、东部跨越、北部提升’梯度布局。”</p>
+              <div class="source">北京市“十五五”规划相关章节</div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="footer"><span>北京市侧重系统统筹：门类完整、功能复合、依托全市与京津冀协同</span><span class="page-index">04</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-5" data-title="海淀重点产业">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Haidian District</div>
+          <h2>海淀区重点产业体系：人工智能牵引的技术密集型结构</h2>
+          <p class="subtitle">与北京市全门类布局相比，海淀区更强调以人工智能为牵引，把硬科技、未来产业与科技服务业组织成高门槛、技术密集的创新网络。</p>
+        </div>
+        <div class="page-index">05</div>
+      </header>
+      <div class="two-col">
+        <article class="panel reveal">
+          <h3>重点产业清单</h3>
+          <ul class="clean">
+            <li><span class="strong">核心引擎</span>：人工智能。</li>
+            <li><span class="strong">5 大战略性新兴产业</span>：集成电路设计、医药健康、商业航天、工业软件、高端科学仪器。</li>
+            <li><span class="strong">3 大未来产业</span>：具身智能、量子科技、脑机接口。</li>
+            <li><span class="strong">基础支撑</span>：科技服务业。</li>
+          </ul>
+          <div class="tag-row" style="margin-top:10px;"><span class="tag">人工智能牵引</span><span class="tag gold">5 + 3 重点产业</span><span class="tag green">科技服务支撑</span></div>
+        </article>
+        <article class="panel gold reveal">
+          <h3>原文与解读支撑</h3>
+          <div class="quote-card gold">
+            <p>“打造全球人工智能产业高地。”</p>
+            <div class="source">海淀区“十五五”规划与官方解读</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“建设国际一流的未来产业先导区。”</p>
+            <div class="source">海淀区“十五五”规划</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“‘1+X+1’体系塔尖的‘1’是人工智能产业……塔身的‘X’是‘5+3’重点产业……塔基的‘1’是科技服务业。”</p>
+            <div class="source">海淀区 2026 公开产业布局解读</div>
+          </div>
+        </article>
+      </div>
+      <div class="footer"><span>海淀最鲜明的特征：高门槛前沿技术集群</span><span class="page-index">05</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-6" data-title="海淀现实对应">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Haidian in Reality</div>
+          <h2>海淀区产业现实基础与形成机制</h2>
+          <p class="subtitle">海淀的核心优势不在土地承载，而在高校、国家实验室、科研平台与硬科技企业的高密度集聚，因此更适合承担技术策源和未来产业先导功能。</p>
+        </div>
+        <div class="page-index">06</div>
+      </header>
+      <div class="two-col" style="grid-template-columns: 1.08fr 0.92fr; flex:1;">
+        <article class="panel reveal">
+          <h3>现实数据证据</h3>
+          <table class="data-table">
+            <tr><th>地区生产总值</th><td>2025 年海淀区 GDP 达 <span class="strong">1.37 万亿元</span>，增速约 <span class="strong">7.2%</span>，体现强劲的创新型经济基础。</td></tr>
+            <tr><th>科技企业</th><td>科技型企业总量约 <span class="strong">14.54 万家</span>，2025 年新增科技型企业超过 <span class="strong">2.4 万家</span>，说明海淀形成持续创业与技术迭代能力。</td></tr>
+            <tr><th>成果转化</th><td>技术合同成交额约 <span class="strong">4045 亿元</span>，说明科研成果转化已经成为区域产业竞争力的重要来源。</td></tr>
+            <tr><th>优质企业</th><td>国家级专精特新“小巨人”企业达到 <span class="strong">463 家</span>，折射出工业软件、仪器、芯片等硬科技细分赛道的厚度。</td></tr>
+            <tr><th>AI 生态</th><td>公开资料显示海淀 AI 企业超过 <span class="strong">1300 家</span>、备案大模型 <span class="strong">74 款</span>，AI 已成为“1+X+1”体系中的塔尖产业。</td></tr>
+            <tr><th>政策投入</th><td>2026 年产业创新专项资金规模约 <span class="strong">90 亿元</span>，显示区级政策继续向关键核心技术和未来产业倾斜。</td></tr>
+          </table>
+          <div class="caption">资料来源：海淀区 2025、2026 年政府工作报告及产业大会公开报道；部分 AI 指标采用公开口径并标注年份。</div>
+        </article>
+        <div class="stack">
+          <article class="panel reveal tech-figure">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" aria-label="海淀创新生态线稿图">
+              <circle cx="260" cy="120" r="52" fill="none" stroke="#8fd8ff" stroke-width="2.2"/>
+              <circle cx="260" cy="120" r="92" fill="none" stroke="#9485ff" stroke-width="1.5" stroke-dasharray="6 6"/>
+              <circle cx="260" cy="120" r="132" fill="none" stroke="#71dcc6" stroke-width="1.5" stroke-dasharray="6 6"/>
+              <rect x="215" y="98" width="90" height="44" rx="12" fill="none" stroke="#8fd8ff" stroke-width="1.8"/>
+              <rect x="56" y="38" width="110" height="42" rx="12" fill="none" stroke="#efc57a" stroke-width="1.7"/>
+              <rect x="354" y="38" width="110" height="42" rx="12" fill="none" stroke="#efc57a" stroke-width="1.7"/>
+              <rect x="56" y="162" width="110" height="42" rx="12" fill="none" stroke="#71dcc6" stroke-width="1.7"/>
+              <rect x="354" y="162" width="110" height="42" rx="12" fill="none" stroke="#71dcc6" stroke-width="1.7"/>
+              <path d="M166 59L215 108M354 59L305 108M166 183L215 132M354 183L305 132" stroke="#8fd8ff" stroke-width="1.6" fill="none"/>
+              <text x="260" y="124" fill="#edf5ff" font-size="16" text-anchor="middle">人工智能</text>
+              <text x="111" y="63" fill="#edf5ff" font-size="14" text-anchor="middle">高校院所</text>
+              <text x="409" y="63" fill="#edf5ff" font-size="14" text-anchor="middle">国家实验室</text>
+              <text x="111" y="187" fill="#edf5ff" font-size="14" text-anchor="middle">硬科技企业</text>
+              <text x="409" y="187" fill="#edf5ff" font-size="14" text-anchor="middle">科技服务业</text>
+            </svg>
+          </article>
+          <article class="panel gold reveal">
+            <h3>原文与含义</h3>
+            <div class="quote-card gold">
+              <p>“打造全球人工智能产业高地，建设国际一流的未来产业先导区。”</p>
+              <div class="source">海淀区“十五五”规划与相关解读</div>
+            </div>
+            <div class="quote-card gold" style="margin-top:10px;">
+              <p>“‘1+X+1’体系塔尖是人工智能，塔身是‘5+3’重点产业，塔基是科技服务业。”</p>
+              <div class="source">海淀区公开产业布局解读</div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="footer"><span>海淀区侧重技术策源：科研资源密度高，产业链条偏前沿研发与成果转化</span><span class="page-index">06</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-7" data-title="朝阳重点产业">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Chaoyang District</div>
+          <h2>朝阳区重点产业体系：高端服务业、融合发展与场景创新</h2>
+          <p class="subtitle">朝阳区与海淀的差异不在于是否重视新技术，而在于其以金融、高端商务、文化消费和开放平台为主轴，通过场景建设承接并放大技术应用。</p>
+        </div>
+        <div class="page-index">07</div>
+      </header>
+      <div class="two-col">
+        <article class="panel reveal">
+          <h3>重点产业清单</h3>
+          <ul class="clean">
+            <li><span class="strong">主轴产业</span>：金融、高端商务、文化、消费等现代服务业。</li>
+            <li><span class="strong">融合方向</span>：现代服务业和先进制造业融合互促。</li>
+            <li><span class="strong">科技承接方式</span>：数字经济、人工智能、低碳等领域的全域应用场景创新。</li>
+            <li><span class="strong">空间抓手</span>：CBD、朝阳园、山河湾谷以及重点功能区梯度布局。</li>
+          </ul>
+        </article>
+        <article class="panel gold reveal">
+          <h3>原文支撑</h3>
+          <div class="quote-card gold">
+            <p>“打造金融发展新高地。”</p>
+            <div class="source">朝阳区“十五五”规划，第四篇第一章</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“推动现代服务业和先进制造业融合互促。”</p>
+            <div class="source">朝阳区“十五五”规划，第四篇第二章</div>
+          </div>
+          <div class="quote-card gold" style="margin-top:10px;">
+            <p>“建立全要素场景创新体系，以场景建设牵引技术创新应用。”</p>
+            <div class="source">朝阳区“十五五”规划，第五篇第二章</div>
+          </div>
+        </article>
+      </div>
+      <div class="footer"><span>朝阳最鲜明的特征：开放资源和场景驱动</span><span class="page-index">07</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-8" data-title="朝阳现实对应">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Chaoyang in Reality</div>
+          <h2>朝阳区产业现实基础与形成机制</h2>
+          <p class="subtitle">朝阳区的现实优势在于 CBD、国际交往、消费文化与总部经济集聚，因此更适合承担市场接口、场景验证、开放合作和服务业升级功能。</p>
+        </div>
+        <div class="page-index">08</div>
+      </header>
+      <div class="two-col" style="grid-template-columns: 1.08fr 0.92fr; flex:1;">
+        <article class="panel reveal">
+          <h3>现实数据证据</h3>
+          <table class="data-table">
+            <tr><th>地区生产总值</th><td>2025 年朝阳区 GDP 达 <span class="strong">9668.5 亿元</span>，继续保持北京中心城区中高能级经济体量。</td></tr>
+            <tr><th>产业结构</th><td>已形成 <span class="strong">5 个千亿级行业</span>，其中金融、信息服务、租赁和商务服务、科技服务贡献突出，说明其主轴是高端服务业而非单点制造。</td></tr>
+            <tr><th>总部经济</th><td>跨国公司地区总部累计达 <span class="strong">177 家</span>，国际化企业网络为开放平台和资源配置提供基础。</td></tr>
+            <tr><th>AI 与未来产业</th><td>AI 相关企业近 <span class="strong">700 家</span>，未来产业关联企业超过 <span class="strong">2500 家</span>，表明朝阳并非缺少新技术，而是更偏向应用导入与场景转化。</td></tr>
+            <tr><th>文化消费</th><td>文体娱乐业营收占全国约 <span class="strong">8%</span>，潮玩行业营收增长约 <span class="strong">191.6%</span>，显示消费与文化场景对新产业具有较强放大作用。</td></tr>
+            <tr><th>空间平台</th><td>CBD、朝阳园、山河湾谷及重点商圈共同构成从总部办公、科技服务到场景消费的多层级空间平台。</td></tr>
+          </table>
+          <div class="caption">资料来源：朝阳区 2026 年政府工作报告、未来产业公开报道、“两区”建设与总部经济相关公开资料。</div>
+        </article>
+        <div class="stack">
+          <article class="panel reveal tech-figure">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" aria-label="朝阳场景创新线稿图">
+              <rect x="36" y="92" width="110" height="48" rx="12" fill="none" stroke="#8fd8ff" stroke-width="1.8"/>
+              <rect x="204" y="36" width="112" height="48" rx="12" fill="none" stroke="#efc57a" stroke-width="1.8"/>
+              <rect x="204" y="156" width="112" height="48" rx="12" fill="none" stroke="#71dcc6" stroke-width="1.8"/>
+              <rect x="372" y="92" width="112" height="48" rx="12" fill="none" stroke="#9485ff" stroke-width="1.8"/>
+              <path d="M146 116H204M316 60C356 60 356 116 372 116M316 180C356 180 356 124 372 124" stroke="#8fd8ff" stroke-width="1.7" fill="none"/>
+              <circle cx="260" cy="120" r="84" fill="none" stroke="#8fd8ff" stroke-width="1.2" stroke-dasharray="6 6"/>
+              <text x="91" y="121" fill="#edf5ff" font-size="15" text-anchor="middle">国际资源</text>
+              <text x="260" y="65" fill="#edf5ff" font-size="15" text-anchor="middle">金融商务</text>
+              <text x="260" y="185" fill="#edf5ff" font-size="15" text-anchor="middle">文化消费</text>
+              <text x="428" y="121" fill="#edf5ff" font-size="15" text-anchor="middle">场景转化</text>
+            </svg>
+          </article>
+          <article class="panel gold reveal">
+            <h3>原文与含义</h3>
+            <div class="quote-card gold">
+              <p>“打造金融发展新高地，推动现代服务业和先进制造业融合互促。”</p>
+              <div class="source">朝阳区“十五五”规划</div>
+            </div>
+            <div class="quote-card gold" style="margin-top:10px;">
+              <p>“建立全要素场景创新体系，以场景建设牵引技术创新应用。”</p>
+              <div class="source">朝阳区“十五五”规划，第五篇第二章</div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="footer"><span>朝阳区侧重应用放大：总部经济、国际资源与消费文化场景共同塑造其产业方向</span><span class="page-index">08</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-9" data-title="市区差异总览">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Similarities & Differences</div>
+          <h2>北京市与两区产业规划差异总览</h2>
+          <p class="subtitle">真正需要区分的不是“三者都发展什么”，而是北京市承担系统统筹，海淀承担技术策源，朝阳承担应用放大；三者处于不同治理层级与产业链条环节。</p>
+        </div>
+        <div class="page-index">09</div>
+      </header>
+      <div class="two-col" style="grid-template-columns: 0.88fr 1.12fr; flex:1;">
+        <article class="panel gold reveal">
+          <h3>三层判断</h3>
+          <div class="mini-grid">
+            <div class="mini-block">
+              <h4>治理层级</h4>
+              <p class="small">北京市是总纲，负责首都产业体系门类与空间框架；海淀、朝阳属于区级专门化承接平台。</p>
+            </div>
+            <div class="mini-block">
+              <h4>产业链位置</h4>
+              <p class="small">北京市偏“系统配置”，海淀偏“技术策源”，朝阳偏“场景放大”。</p>
+            </div>
+            <div class="mini-block">
+              <h4>理解方式</h4>
+              <p class="small">不能用同一把尺子看三者，因为它们并不回答同一个问题。</p>
+            </div>
+          </div>
+        </article>
+        <article class="panel reveal">
+          <h3>总论说明</h3>
+          <ul class="clean">
+            <li>北京市规划强调“完整产业体系”，因此必须同时覆盖先进制造、未来产业、生产性服务业与区域协同布局。</li>
+            <li>海淀区规划强调“人工智能高地”和“未来产业先导区”，因此天然收缩到最依赖科研资源和高端人才的产业段。</li>
+            <li>朝阳区规划强调“金融发展新高地”“场景创新体系”和“两业融合”，说明其重心是技术进入市场与消费系统的效率。</li>
+            <li>从比较逻辑上看，后续应分别回答三类问题：哪些产业市级统筹、哪些被海淀强化、哪些被朝阳强化，以及各自明确不承担什么。</li>
+          </ul>
+          <div class="quote-card" style="margin-top:12px;">
+            <p>北京市与两个区的主要差异，并不只是“产业名单不同”，而是规划尺度、功能责任、资源禀赋和预期结果都不同。</p>
+            <div class="source">总论判断</div>
+          </div>
+        </article>
+      </div>
+      <div class="footer"><span>关键差异：北京市是总纲和总盘子，海淀与朝阳分别是技术策源平台和应用放大平台</span><span class="page-index">09</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-10" data-title="反向对比">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Reverse Comparison</div>
+          <h2>反向对比：北京市、海淀区、朝阳区分别不做什么</h2>
+          <p class="subtitle">用“边界”来理解差异更清楚。三地都发展新质生产力，但各自并不承担同样的产业任务，也不会追求同样的产业结构。</p>
+        </div>
+        <div class="page-index">10</div>
+      </header>
+      <div class="reverse-grid">
+        <article class="panel gold reveal">
+          <h3>北京市不做什么</h3>
+          <ul class="clean">
+            <li>不把资源只押注单一赛道，不会像区级规划那样围绕一种核心产业做高度收缩。</li>
+            <li>不把全部产业承载集中在中心城区，必须通过全市统筹和京津冀协同分散制造与转化环节。</li>
+            <li>不以单一区域的比较优势替代全市布局，因此不能只强调 AI、或只强调金融商务、或只强调消费场景。</li>
+          </ul>
+        </article>
+        <article class="panel reveal">
+          <h3>海淀区不做什么</h3>
+          <ul class="clean">
+            <li>不追求像北京市那样配置全门类产业体系，尤其不以大规模制造承载和全市空间统筹为首要任务。</li>
+            <li>不以金融商务、文旅消费和总部经济作为主轴，不会把场景放大功能放在技术策源之前。</li>
+            <li>不做平均用力的产业分配，而是优先把资源压向人工智能、硬科技和未来产业。</li>
+          </ul>
+        </article>
+        <article class="panel reveal">
+          <h3>朝阳区不做什么</h3>
+          <ul class="clean">
+            <li>不承担北京市那种全产业系统统筹任务，也不以形成完整先进制造谱系为主要目标。</li>
+            <li>不以原始创新和基础科研突破作为第一定位，不会复制海淀式的技术策源型结构。</li>
+            <li>不把产业资源主要投向长周期、高实验室依赖的赛道，而更强调市场化、场景化和开放合作能力。</li>
+          </ul>
+        </article>
+      </div>
+      <div class="footer"><span>反向判断更清楚：北京市不收缩，海淀不平均，朝阳不做基础科研主轴</span><span class="page-index">10</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-11" data-title="门类映射">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Category Mapping</div>
+          <h2>北京市规划中的产业门类：哪些被海淀强化，哪些被朝阳强化，哪些主要留在市级统筹</h2>
+          <p class="subtitle">这一页不再泛谈差异，而是把北京市规划中的主要门类逐项拆开，看其在区级层面的强化方向与未下沉部分。</p>
+        </div>
+        <div class="page-index">11</div>
+      </header>
+      <article class="panel reveal" style="flex:1;">
+        <table class="mapping-table">
+          <tr>
+            <th>北京市产业门类</th>
+            <th>海淀区强化</th>
+            <th>朝阳区强化</th>
+            <th>主要留在市级统筹</th>
+          </tr>
+          <tr>
+            <td>人工智能</td>
+            <td>最强强化，直接作为塔尖产业和产业高地主轴。</td>
+            <td>强调应用导入、场景建设和企业集聚。</td>
+            <td>AI 全市基础设施、制度环境和跨区域协同仍由市级统筹。</td>
+          </tr>
+          <tr>
+            <td>医药健康</td>
+            <td>强化创新研发、高端仪器、科研转化能力。</td>
+            <td>不是核心主轴，仅在服务与应用端承接部分需求。</td>
+            <td>产业链完整布局、审批协同、空间承载更多停留在市级层面。</td>
+          </tr>
+          <tr>
+            <td>集成电路 / 工业软件 / 高端仪器</td>
+            <td>显著强化，属于海淀硬科技重点集群。</td>
+            <td>不作为主轴，仅在数字服务和应用生态中间接受益。</td>
+            <td>制造链协同、产业空间和全链条配套主要由市级统筹。</td>
+          </tr>
+          <tr>
+            <td>金融 / 高端商务 / 文化消费</td>
+            <td>不是主轴，更多作为科技创新服务配套。</td>
+            <td>显著强化，是朝阳规划中的中心板块。</td>
+            <td>首都层面的金融监管协同和高端服务整体布局仍由市级把握。</td>
+          </tr>
+          <tr>
+            <td>智能制造 / 智能网联汽车 / 机器人 / 空天</td>
+            <td>在设计研发和部分前沿环节强化，如商业航天、机器人算法等。</td>
+            <td>不是主轴，更偏向服务和场景承接。</td>
+            <td>大规模制造承载、整车和产业链协同主要留在市级及区域协同层面。</td>
+          </tr>
+          <tr>
+            <td>绿色低碳 / 产业空间统筹 / 区域协同</td>
+            <td>参与技术创新，但不是单独展开的区级主轴。</td>
+            <td>参与城市应用与低碳场景，但不是第一产业主线。</td>
+            <td>这类任务最典型地保留在北京市层级，属于全市治理和协同范畴。</td>
+          </tr>
+        </table>
+      </article>
+      <div class="footer"><span>门类映射结论：海淀强化技术密集段，朝阳强化服务与场景段，系统性任务仍主要留在市级</span><span class="page-index">11</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-12" data-title="北京市与海淀比较">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Beijing vs Haidian</div>
+          <h2>北京市与海淀区：总盘子与技术策源地的差别</h2>
+          <p class="subtitle">海淀不是北京市产业体系的缩小版，而是从市级总纲中切出最依赖科研资源、最需要高端人才和高密度创新平台的一段。</p>
+        </div>
+        <div class="page-index">12</div>
+      </header>
+      <div class="contrast-stack">
+        <article class="panel reveal contrast-card">
+          <div class="axis-list">
+            <div class="axis-item">
+              <h4>1. 产业边界</h4>
+              <p class="small">北京市必须同时配置先进制造、未来产业和生产性服务业，边界覆盖首都经济全域；海淀则主动聚焦 AI 与硬科技，不追求门类完整。</p>
+            </div>
+            <div class="axis-item">
+              <h4>2. 规划任务</h4>
+              <p class="small">北京市规划回答“首都需要哪些产业”；海淀规划回答“哪些前沿产业最适合在本区率先突破”。</p>
+            </div>
+            <div class="axis-item">
+              <h4>3. 资源条件</h4>
+              <p class="small">海淀的核心资源是高校院所、实验室、科研人才和科技企业，因此更擅长知识密集型、研发密集型产业。</p>
+            </div>
+            <div class="axis-item">
+              <h4>4. 结果导向</h4>
+              <p class="small">北京市追求体系安全与协同布局；海淀追求技术原创突破、成果孵化与未来产业先发优势。</p>
+            </div>
+          </div>
+          <div class="stack">
+            <article class="score-card">
+              <h3>北京市侧</h3>
+              <ul class="clean">
+                <li>产业门类更全，兼顾信息技术、医药健康、AI、绿色低碳、汽车、机器人、空天和高端服务业。</li>
+                <li>强调产业空间统筹与京津冀协同，关注的是首都产业体系的完整性与抗风险能力。</li>
+                <li>现实数据上，GDP 5.2 万亿元、数字经济 2.4 万亿元，说明其规划对象是大尺度产业系统。</li>
+              </ul>
+            </article>
+            <article class="score-card">
+              <h3>海淀区侧</h3>
+              <ul class="clean">
+                <li>突出人工智能、商业航天、工业软件、高端仪器、量子科技、脑机接口等高门槛产业。</li>
+                <li>强调“1+X+1”结构，本质是把资源压向技术源头和未来产业赛道，而非平均分配。</li>
+                <li>技术合同成交额 4045 亿元、科技企业 14.54 万家，支撑其“策源地”定位。</li>
+              </ul>
+            </article>
+          </div>
+        </article>
+        <article class="panel gold reveal">
+          <h3>一句话判断</h3>
+          <p>北京市像一张覆盖全市的产业地图，海淀像这张地图上最靠近“原始创新”和“关键核心技术”的高密度节点。二者差异的关键，不是产业先进与否，而是规划层级、目标尺度和资源禀赋完全不同。</p>
+        </article>
+      </div>
+      <div class="footer"><span>重点结论：北京市管全局与完整性，海淀管前沿与原创性</span><span class="page-index">12</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-13" data-title="北京市与朝阳比较">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Beijing vs Chaoyang</div>
+          <h2>北京市与朝阳区：总盘子与开放应用平台的差别</h2>
+          <p class="subtitle">朝阳并不承担北京市那种全门类统筹任务，它更像首都产业体系中把技术转成金融服务、商务服务、消费体验和国际合作机会的关键接口。</p>
+        </div>
+        <div class="page-index">13</div>
+      </header>
+      <div class="contrast-stack">
+        <article class="panel reveal contrast-card">
+          <div class="axis-list">
+            <div class="axis-item">
+              <h4>1. 产业重心</h4>
+              <p class="small">北京市把先进制造与未来产业纳入主框架；朝阳则把金融、高端商务、文化消费和场景创新放在更核心位置。</p>
+            </div>
+            <div class="axis-item">
+              <h4>2. 规划逻辑</h4>
+              <p class="small">北京市关心体系完整、空间统筹和产业安全；朝阳关心开放资源配置、技术场景落地和服务业能级提升。</p>
+            </div>
+            <div class="axis-item">
+              <h4>3. 资源条件</h4>
+              <p class="small">朝阳并不以基础科研最强见长，而是以总部经济、国际交往、消费文化和 CBD 商务网络形成比较优势。</p>
+            </div>
+            <div class="axis-item">
+              <h4>4. 结果导向</h4>
+              <p class="small">北京市追求全链条布局；朝阳追求让新技术更快进入市场、城市治理、消费体验和国际合作网络。</p>
+            </div>
+          </div>
+          <div class="stack">
+            <article class="score-card">
+              <h3>北京市侧</h3>
+              <ul class="clean">
+                <li>既要抓 AI、医药健康，也要抓集成电路、智能网联汽车、机器人、空天等制造与未来产业群。</li>
+                <li>强调全市空间与区域协同，重点是形成完整产业体系，而非突出某一种城市消费或商务场景。</li>
+                <li>市级数据反映其尺度远大于区级专项布局，重在全局统筹能力。</li>
+              </ul>
+            </article>
+            <article class="score-card">
+              <h3>朝阳区侧</h3>
+              <ul class="clean">
+                <li>更加突出金融发展新高地、两业融合、场景创新体系和高能级消费文化生态。</li>
+                <li>177 家跨国公司地区总部、近 700 家 AI 企业、2500+ 未来产业关联企业说明其优势在资源链接与市场放大。</li>
+                <li>其规划重点不是从零创造技术，而是提高技术商业化、国际化和城市化应用效率。</li>
+              </ul>
+            </article>
+          </div>
+        </article>
+        <article class="panel gold reveal">
+          <h3>一句话判断</h3>
+          <p>如果说北京市强调“产业体系必须完整”，那么朝阳强调的是“新技术必须被看见、被使用、被交易、被放大”。这正是市级总盘子与区级开放应用平台之间最重要的差异。</p>
+        </article>
+      </div>
+      <div class="footer"><span>重点结论：北京市管全局与协同，朝阳管开放平台、市场接口与场景放大</span><span class="page-index">13</span></div>
+    </div>
+  </section>
+
+  <section class="slide" id="slide-14" data-title="结论与参考">
+    <div class="slide-content">
+      <header class="header reveal">
+        <div>
+          <div class="section-kicker">Conclusion & References</div>
+          <h2>综合结论与资料来源</h2>
+          <p class="subtitle">从市级到区级，三地不是并列竞赛关系，而是首都产业体系内部不同层级、不同环节、不同功能的平台化分工。</p>
+        </div>
+        <div class="page-index">14</div>
+      </header>
+      <div class="two-col" style="grid-template-columns: 0.92fr 1.08fr; flex:1;">
+        <article class="panel reveal" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <h3>综合结论</h3>
+            <ul class="clean">
+              <li>北京市“十五五”产业规划的最大特点是门类完整，重点在于构建首都层级的现代化产业体系与空间统筹框架。</li>
+              <li>海淀区的最大特点是技术密集度高，人工智能及其关联硬科技产业构成区域比较优势的核心。</li>
+              <li>朝阳区的最大特点是服务业能级高、国际资源密集，技术创新更多通过总部经济、金融商务和消费文化场景转化为市场应用。</li>
+              <li>三地共同推动新质生产力，但分别处于产业链上的系统配置、技术策源和场景放大环节。</li>
+            </ul>
+          </div>
+          <div class="quote-card">
+            <p>如果将首都产业体系视作一个网络，北京市负责制定系统结构与资源配置规则，海淀负责提供前沿技术和未来产业突破，朝阳负责把技术嵌入开放平台、消费场景和国际网络之中。</p>
+            <div class="source">综合比较结论</div>
+          </div>
+        </article>
+        <div class="sources-grid">
+          <article class="source-card reveal">
+            <h3>北京市规划</h3>
+            <p class="small">《北京市国民经济和社会发展第十五个五年规划纲要》</p>
+            <p class="source">https://fgw.beijing.gov.cn/fgwzwgk/2024zcwj/ghjhwb/wngh/202604/W020260407671194740574.pdf</p>
+          </article>
+          <article class="source-card reveal">
+            <h3>海淀区规划</h3>
+            <p class="small">《北京市海淀区国民经济和社会发展第十五个五年规划纲要》及相关官方解读</p>
+            <p class="source">https://zyk.bjhd.gov.cn/zwdt/zcwj/202604/t20260428_4813297.shtml</p>
+          </article>
+          <article class="source-card reveal">
+            <h3>朝阳区规划</h3>
+            <p class="small">《北京市朝阳区国民经济和社会发展第十五个五年规划纲要》</p>
+            <p class="source">http://www.bjchy.gov.cn/UserFiles/File/bcf80072ef68490e9460a42a68a517cc.pdf</p>
+          </article>
+          <article class="source-card reveal">
+            <h3>北京市数据</h3>
+            <p class="small">北京市 2026 年政府工作报告、数字经济与人工智能公开发布材料</p>
+            <p class="source">用于 GDP、数字经济、AI 核心产业、高新技术企业等指标</p>
+          </article>
+          <article class="source-card reveal">
+            <h3>海淀区数据</h3>
+            <p class="small">海淀区 2025、2026 年政府工作报告与产业大会公开资料</p>
+            <p class="source">用于 GDP、技术合同、科技企业、专精特新与 AI 生态指标</p>
+          </article>
+          <article class="source-card reveal">
+            <h3>朝阳区数据</h3>
+            <p class="small">朝阳区 2026 年政府工作报告、未来产业和总部经济公开资料</p>
+            <p class="source">用于 GDP、总部数量、AI 企业和未来产业关联企业指标</p>
+          </article>
+        </div>
+      </div>
+      <div class="footer"><span>浏览方式：上下滚动 / 键盘上下键 / 右侧导航点</span><span class="page-index">14</span></div>
+    </div>
+  </section>
+
+  <script>
+    class VerticalDeck {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.progressBar = document.getElementById('progressBar');
+        this.pageIndicator = document.getElementById('pageIndicator');
+        this.navDotsRoot = document.getElementById('navDots');
+        this.activeIndex = 0;
+        this.buildDots();
+        this.bindEvents();
+        this.observeSlides();
+        this.updateUI(0);
+      }
+
+      buildDots() {
+        this.slides.forEach((slide, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'nav-dot' + (index === 0 ? ' active' : '');
+          button.setAttribute('aria-label', `跳转到第 ${index + 1} 页：${slide.dataset.title || '未命名页'}`);
+          button.addEventListener('click', () => this.go(index));
+          this.navDotsRoot.appendChild(button);
+        });
+        this.dots = Array.from(this.navDotsRoot.querySelectorAll('.nav-dot'));
+      }
+
+      bindEvents() {
+        window.addEventListener('keydown', (event) => {
+          if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+            event.preventDefault();
+            this.go(this.activeIndex + 1);
+          }
+          if (['ArrowUp', 'PageUp'].includes(event.key)) {
+            event.preventDefault();
+            this.go(this.activeIndex - 1);
+          }
+          if (event.key === 'Home') {
+            event.preventDefault();
+            this.go(0);
+          }
+          if (event.key === 'End') {
+            event.preventDefault();
+            this.go(this.slides.length - 1);
+          }
+        });
+      }
+
+      observeSlides() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const index = this.slides.indexOf(entry.target);
+            if (index !== -1) {
+              this.activeIndex = index;
+              this.updateUI(index);
+            }
+            entry.target.classList.add('visible');
+          });
+        }, { threshold: 0.62 });
+
+        this.slides.forEach((slide) => observer.observe(slide));
+      }
+
+      go(index) {
+        const safe = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides[safe].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.activeIndex = safe;
+        this.updateUI(safe);
+      }
+
+      updateUI(index) {
+        const total = this.slides.length;
+        this.pageIndicator.textContent = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+        this.progressBar.style.width = `${((index + 1) / total) * 100}%`;
+        this.dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      new VerticalDeck();
+    });
+  </script>
+</body>
+</html>
